@@ -3,13 +3,16 @@ import { FaTimes } from "react-icons/fa";
 import { social, pages } from "../../data/routes";
 import logo from "../../assets/logo.jpg";
 import "./styles.css";
+import { useGlobalContext } from "../GlobalContext";
 
 export const Navbar = () => {
+  const { isSidebarDisplayed, closeSidebar } = useGlobalContext();
+
   return (
-    <aside className={`sidebar ${true && "show-sidebar"}`}>
+    <aside className={`sidebar ${isSidebarDisplayed && "show-sidebar"}`}>
       <div className="sidebar-header">
         <img src={logo} className="logo" alt="website logo" />
-        <button className="close-btn">
+        <button className="close-btn" onClick={closeSidebar}>
           <FaTimes />
         </button>
       </div>

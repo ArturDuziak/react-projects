@@ -18,7 +18,6 @@
   color: var(--clr-red-light);
 }
 .logo {
-  justify-self: center;
   height: 40px;
 }
 
@@ -93,4 +92,19 @@ ul {
   .sidebar {
     width: 400px;
   }
+}
+
+.hamburger-btn-container > svg {
+  transition: var(--transition);
+  font-size: 3rem;
+  color: var(--clr-primary-4);
+  margin: 10px 0 0 20px;
+}
+
+.hamburger-btn-container > svg:hover {
+  color: var(--clr-primary-3);
+}
+
+.hamburger-btn-container.active > svg {
+  transform: rotate(90deg);
 }
