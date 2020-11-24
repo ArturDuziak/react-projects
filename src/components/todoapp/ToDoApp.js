@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import ToDoData from "../../data/ToDoData.json";
 import { GoPlus } from "react-icons/go";
+import "./styles.css"
 
 export const ToDoApp = () => {
   const [toDos, setToDos] = useState(ToDoData.ToDos);
   const [newToDoTitle, setNewToDoTitle] = useState("");
+  const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
 
   const addToDo = e => {
     e.preventDefault();
 
-    const id = new Date().getTime().toString();
-    const newToDo = {
-      id,
-      title: newToDoTitle,
-      description: "asd",
-      isCompleted: false,
-      status: "to_do"
-    };
-    setToDos(prevState => [newToDo, ...prevState]);
-    setNewToDoTitle("");
+    if (newToDoTitle) {
+      const id = new Date().getTime().toString();
+      const newToDo = {
+        id,
+        title: newToDoTitle,
+        description: "asd",
+        isCompleted: false,
+        status: "to_do"
+      };
+      setToDos(prevState => [newToDo, ...prevState]);
+      setNewToDoTitle("");
+    } else {
+      setIsInputErrorDisplayed(true);
+    }
   };
 
   const handleTextChange = e => {
@@ -39,6 +45,9 @@ export const ToDoApp = () => {
           <button type="submit">
             <GoPlus />
           </button>
+          <span className={`input-error ${isInputErrorDisplayed && "show"}`}>
+            Value cannot be empty
+          </span>
         </form>
       </div>
       <div>
@@ -46,7 +55,7 @@ export const ToDoApp = () => {
           const { id, title, description } = item;
           return (
             <span key={id}>
-              <br/>
+              <br />
               id: {id}
               <br />
               title: {title}

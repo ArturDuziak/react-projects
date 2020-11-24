@@ -1,0 +1,9 @@
+.input-error {
+  display: block;
+  visibility: hidden;
+  color: var(--clr-red-light);
+}
+
+.input-error.show {
+  visibility: visible;
+}
