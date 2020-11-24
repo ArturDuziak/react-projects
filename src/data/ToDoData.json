@@ -1,0 +1,25 @@
+{
+  "ToDos": [
+    {
+      "id": 1,
+      "title": "Title of first ticket",
+      "description": "Description of the ticket might be very long which you can observe here and there f the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and there",
+      "isCompleted": false,
+      "status": "to_do"
+    },
+    {
+      "id": 2,
+      "title": "Title of second ticket",
+      "description": "Description of the ticket might be very long which you can observe here and there f the ticket might be very long which you can observe here and there Description",
+      "isCompleted": false,
+      "status": "to_do"
+    },
+    {
+      "id": 3,
+      "title": "title of third ticket",
+      "description": "Description of the ticket might be very long which you can observe here and there f the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and there",
+      "isCompleted": true,
+      "status": "to_do"
+    }
+  ]
+}

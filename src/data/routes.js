@@ -16,7 +16,7 @@ export const pages = [
   },
   {
     id: 2,
-    url: "/ToDoApp",
+    url: "/TODO-App",
     text: "Jira Clone",
     icon: <FaClipboardList />
   }

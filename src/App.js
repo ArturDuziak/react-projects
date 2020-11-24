@@ -5,6 +5,7 @@ import { Navbar } from "./components/navbar/Navbar";
 import { Home } from "./components/home/Home";
 import { ErrorPage } from "./components/error-page/ErrorPage";
 import { NavbarTriggerButton } from "./components/navbar/NavbarTriggerButton";
+import { ToDoApp } from "./components/todoapp/ToDoApp"
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/TODO-App">
+          <ToDoApp />
         </Route>
         <Route path="*">
           <ErrorPage />
