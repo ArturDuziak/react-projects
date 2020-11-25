@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import ToDoData from "../../data/ToDoData.json";
 import { GoPlus } from "react-icons/go";
-import "./styles.css"
+import "./styles.css";
 
 export const ToDoApp = () => {
-  const [toDos, setToDos] = useState(ToDoData.ToDos);
+  const [toDos, setToDos] = useState(
+    JSON.parse(localStorage.getItem("toDosData")) || ToDoData.ToDos
+  );
   const [newToDoTitle, setNewToDoTitle] = useState("");
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("toDosData", JSON.stringify(toDos));
+  }, [toDos]);
 
   const addToDo = e => {
     e.preventDefault();

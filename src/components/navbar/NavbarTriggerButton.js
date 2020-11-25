@@ -7,8 +7,6 @@ export const NavbarTriggerButton = () => {
   const { isSidebarDisplayed, openSidebar } = useGlobalContext();
 
   return (
-    <div className={`hamburger-btn-container ${isSidebarDisplayed && 'active'}`}>
-      <GiHamburgerMenu onClick={openSidebar} />
-    </div>
+      <GiHamburgerMenu onClick={openSidebar} className="hamburger-btn" />
   );
 };
