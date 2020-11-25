@@ -108,3 +108,16 @@ ul {
 .hamburger-btn-container.active > svg {
   transform: rotate(90deg);
 }
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 400px;
+}
+
+.show-overlay {
+  display: block;
+}
