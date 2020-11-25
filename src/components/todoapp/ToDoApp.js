@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ToDoData from "../../data/ToDoData.json";
 import { GoPlus } from "react-icons/go";
+import ToDoItem from "./ToDoItem";
 import "./styles.css";
 
 export const ToDoApp = () => {
@@ -56,21 +57,22 @@ export const ToDoApp = () => {
           </span>
         </form>
       </div>
-      <div>
-        {toDos.map(item => {
-          const { id, title, description } = item;
-          return (
-            <span key={id}>
-              <br />
-              id: {id}
-              <br />
-              title: {title}
-              <br />
-              desc: {description}
-              <br />
-            </span>
-          );
-        })}
+      <div className="lists-container">
+        <div className="ticket-column">
+          {toDos.map(item => {
+            return <ToDoItem {...item} />;
+          })}
+        </div>
+        <div className="ticket-column">
+          {toDos.map(item => {
+            return <ToDoItem {...item} />;
+          })}
+        </div>
+        <div className="ticket-column">
+          {toDos.map(item => {
+            return <ToDoItem {...item} />;
+          })}
+        </div>
       </div>
     </div>
   );

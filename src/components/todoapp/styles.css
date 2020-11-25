@@ -7,3 +7,26 @@
 .input-error.show {
   visibility: visible;
 }
+
+.todo-item {
+  margin: 5px 10px 20px 10px;
+  border: 1px solid var(--clr-primary-3);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var(--clr-white);
+  box-shadow: 1px 3px 10px 1px #0000005e;
+  position: relative;
+}
+
+.ticket-column {
+  flex: 1;
+}
+
+.ticket-column:nth-child(2) {
+  border-right: 2px solid #000;
+  border-left: 2px solid #000;
+}
+
+.lists-container {
+  display: flex;
+}
