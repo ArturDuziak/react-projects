@@ -30,3 +30,10 @@
 .lists-container {
   display: flex;
 }
+
+.ticket-column > h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+}

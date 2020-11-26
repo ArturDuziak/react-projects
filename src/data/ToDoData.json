@@ -20,6 +20,20 @@
       "description": "Description of the ticket might be very long which you can observe here and there f the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and there",
       "isCompleted": true,
       "status": "to_do"
+    },
+    {
+      "id": 4,
+      "title": "title of fourth ticket",
+      "description": "Description of the ticket might be very long which you can observe here and there f the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and there",
+      "isCompleted": false,
+      "status": "in_progress"
+    },
+    {
+      "id": 5,
+      "title": "title of fifth ticket",
+      "description": "Description of the ticket might be very long which you can observe here and there f the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and theref the ticket might be very long which you can observe here and there",
+      "isCompleted": false,
+      "status": "done"
     }
   ]
 }
