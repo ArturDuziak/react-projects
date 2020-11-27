@@ -50,7 +50,8 @@ export const ToDoAppProvider = ({ children }) => {
         createTicketsList,
         setIsModalDisplayed,
         addToDo,
-        setNewToDoTitle
+        setNewToDoTitle,
+        deleteToDo
       }}
     >
       {children}

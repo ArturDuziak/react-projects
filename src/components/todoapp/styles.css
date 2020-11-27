@@ -16,10 +16,12 @@
   background-color: var(--clr-white);
   box-shadow: 1px 3px 10px 1px #0000005e;
   position: relative;
+  transition: ease-in;
 }
 
 .ticket-column {
   flex: 1;
+  min-height: 600px;
 }
 
 .ticket-column:nth-child(2) {
@@ -36,4 +38,16 @@
   margin-bottom: 10px;
   border-bottom: 1px solid black;
   padding-bottom: 5px;
+}
+
+.delete-ticket-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: rgb(173, 0, 0);
+  font-size: 16px;
+}
+
+.delete-ticket-button:hover {
+  color: red;
 }
