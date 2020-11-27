@@ -2,10 +2,15 @@
   display: block;
   visibility: hidden;
   color: var(--clr-red-light);
+  font-size: 12px;
 }
 
 .input-error.show {
   visibility: visible;
+}
+
+.add-todo-form {
+  margin-left: 10px;
 }
 
 .todo-item {
@@ -19,14 +24,19 @@
   transition: ease-in;
 }
 
+.todo-item > h3 {
+  text-transform: capitalize;
+  margin-bottom: 3px;
+}
+
 .ticket-column {
   flex: 1;
-  min-height: 600px;
+  min-height: 800px;
 }
 
 .ticket-column:nth-child(2) {
-  border-right: 2px solid #000;
-  border-left: 2px solid #000;
+  border-right: 2px solid var(--clr-primary-3);
+  border-left: 2px solid var(--clr-primary-3);
 }
 
 .lists-container {
@@ -35,8 +45,9 @@
 
 .ticket-column > h2 {
   text-align: center;
+  color: var(--clr-primary-2);
   margin-bottom: 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--clr-primary-3);
   padding-bottom: 5px;
 }
 
@@ -50,4 +61,10 @@
 
 .delete-ticket-button:hover {
   color: red;
+}
+
+.todo-item span {
+  text-transform: capitalize;
+  color: var(--clr-primary-3);
+  cursor: pointer;
 }

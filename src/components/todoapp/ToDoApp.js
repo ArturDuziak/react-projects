@@ -19,14 +19,25 @@ export const ToDoApp = () => {
   }, [toDos]);
 
   const handleTextChange = e => {
+    setIsInputErrorDisplayed(false);
     const text = e.target.value;
     setNewToDoTitle(text);
+  };
+
+  const handleAddToDo = (e) => {
+    e.preventDefault();
+
+    if (newToDoTitle) {
+      addToDo();
+    } else {
+      setIsInputErrorDisplayed(true);
+    }
   };
 
   return (
     <div>
       <div className="add-todo-form">
-        <form onSubmit={addToDo}>
+        <form onSubmit={handleAddToDo}>
           <input
             type="text"
             placeholder="What do you want to do?"

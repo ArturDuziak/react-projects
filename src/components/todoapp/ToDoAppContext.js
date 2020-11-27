@@ -11,10 +11,7 @@ export const ToDoAppProvider = ({ children }) => {
   );
   const [newToDoTitle, setNewToDoTitle] = useState("");
 
-  const addToDo = e => {
-    e.preventDefault();
-
-    if (newToDoTitle) {
+  const addToDo = () => {
       const id = new Date().getTime().toString();
       const newToDo = {
         id,
@@ -25,7 +22,6 @@ export const ToDoAppProvider = ({ children }) => {
       };
       setToDos(prevState => [newToDo, ...prevState]);
       setNewToDoTitle("");
-    }
   };
 
   const createTicketsList = filter => {
