@@ -42,7 +42,7 @@ export const ToDoAppProvider = ({ children }) => {
   };
 
   return (
-    <ToDoAppProvider
+    <ToDoAppContext.Provider
       value={{
         isModalDisplayed,
         newToDoTitle,
@@ -54,7 +54,7 @@ export const ToDoAppProvider = ({ children }) => {
       }}
     >
       {children}
-    </ToDoAppProvider>
+    </ToDoAppContext.Provider>
   );
 };
 

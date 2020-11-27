@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import ToDoData from "../../data/ToDoData.json";
 import { GoPlus } from "react-icons/go";
-import ToDoItem from "./ToDoItem";
 import { useToDoAppContext } from "./ToDoAppContext";
+
 import "./styles.css";
 
 export const ToDoApp = () => {
-  // const [toDos, setToDos] = useState(
-  //   JSON.parse(localStorage.getItem("toDosData")) || ToDoData.ToDos
-  // );
-  // const [newToDoTitle, setNewToDoTitle] = useState("");
   const {
     newToDoTitle,
     createTicketsList,
@@ -27,38 +22,6 @@ export const ToDoApp = () => {
     const text = e.target.value;
     setNewToDoTitle(text);
   };
-
-  // const addToDo = e => {
-  //   e.preventDefault();
-
-  //   if (newToDoTitle) {
-  //     const id = new Date().getTime().toString();
-  //     const newToDo = {
-  //       id,
-  //       title: newToDoTitle,
-  //       description: "asd",
-  //       isCompleted: false,
-  //       status: "to_do"
-  //     };
-  //     setToDos(prevState => [newToDo, ...prevState]);
-  //     setNewToDoTitle("");
-  //   } else {
-  //     setIsInputErrorDisplayed(true);
-  //   }
-  // };
-
-  // const createTicketsList = filter => {
-  //   const ticketList = toDos.filter(item => item.status === filter);
-  //   if (ticketList.length === 0) {
-  //     return <p> Add more ticket to display them here </p>;
-  //   } else {
-  //     return ticketList.map(item => <ToDoItem key={item.id} {...item} />);
-  //   }
-  // };
-
-  // const deleteToDo = index => {
-  //   setToDos(toDos.filter(item => item.id !== index));
-  // };
 
   return (
     <div>
