@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { useToDoAppContext } from "./ToDoAppContext";
+import AddToDoModal from "./AddToDoModal";
 
 import "./styles.css";
 
@@ -9,8 +10,9 @@ export const ToDoApp = () => {
     newToDoTitle,
     createTicketsList,
     addToDo,
-    setNewToDoTitle,
-    toDos
+    toDos,
+    openModal,
+    handleTextChange
   } = useToDoAppContext();
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
 
@@ -18,13 +20,7 @@ export const ToDoApp = () => {
     localStorage.setItem("toDosData", JSON.stringify(toDos));
   }, [toDos]);
 
-  const handleTextChange = e => {
-    setIsInputErrorDisplayed(false);
-    const text = e.target.value;
-    setNewToDoTitle(text);
-  };
-
-  const handleAddToDo = (e) => {
+  const handleAddToDo = e => {
     e.preventDefault();
 
     if (newToDoTitle) {
@@ -37,14 +33,14 @@ export const ToDoApp = () => {
   return (
     <div>
       <div className="add-todo-form">
-        <form onSubmit={handleAddToDo}>
+        <form>
           <input
             type="text"
             placeholder="What do you want to do?"
             value={newToDoTitle}
             onChange={handleTextChange}
           />
-          <button type="submit">
+          <button type="button" onClick={openModal}>
             <GoPlus />
           </button>
           <span className={`input-error ${isInputErrorDisplayed && "show"}`}>
@@ -66,6 +62,7 @@ export const ToDoApp = () => {
           {createTicketsList("done")}
         </div>
       </div>
+      <AddToDoModal />
     </div>
   );
 };

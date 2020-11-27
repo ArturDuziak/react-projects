@@ -12,16 +12,16 @@ export const ToDoAppProvider = ({ children }) => {
   const [newToDoTitle, setNewToDoTitle] = useState("");
 
   const addToDo = () => {
-      const id = new Date().getTime().toString();
-      const newToDo = {
-        id,
-        title: newToDoTitle,
-        description: "asd",
-        isCompleted: false,
-        status: "to_do"
-      };
-      setToDos(prevState => [newToDo, ...prevState]);
-      setNewToDoTitle("");
+    const id = new Date().getTime().toString();
+    const newToDo = {
+      id,
+      title: newToDoTitle,
+      description: "asd",
+      isCompleted: false,
+      status: "to_do"
+    };
+    setToDos(prevState => [newToDo, ...prevState]);
+    setNewToDoTitle("");
   };
 
   const createTicketsList = filter => {
@@ -37,6 +37,19 @@ export const ToDoAppProvider = ({ children }) => {
     setToDos(toDos.filter(item => item.id !== index));
   };
 
+  const closeModal = () => {
+    setIsModalDisplayed(false);
+  };
+
+  const openModal = () => {
+    setIsModalDisplayed(true);
+  };
+
+  const handleTextChange = e => {
+    const text = e.target.value;
+    setNewToDoTitle(text);
+  };
+
   return (
     <ToDoAppContext.Provider
       value={{
@@ -47,7 +60,10 @@ export const ToDoAppProvider = ({ children }) => {
         setIsModalDisplayed,
         addToDo,
         setNewToDoTitle,
-        deleteToDo
+        deleteToDo,
+        closeModal,
+        openModal,
+        handleTextChange
       }}
     >
       {children}
