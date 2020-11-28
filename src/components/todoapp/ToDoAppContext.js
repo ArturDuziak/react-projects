@@ -5,26 +5,22 @@ import ToDoData from "../../data/ToDoData.json";
 export const ToDoAppContext = React.createContext();
 
 export const ToDoAppProvider = ({ children }) => {
-  const [toDos, setToDos] = useState(
-    JSON.parse(localStorage.getItem("toDosData")) || ToDoData.ToDos
+  const [ticketsList, setTicketsList] = useState(
+    JSON.parse(localStorage.getItem("TicketsListData")) || ToDoData.Tickets
   );
-  const [newToDoTitle, setNewToDoTitle] = useState("");
+  const [ticket, setTicket] = useState({ title: "", description: "", status: "to_do" });
 
-  const addToDo = () => {
+  const addTicket = () => {
     const id = new Date().getTime().toString();
-    const newToDo = {
+    const newTicket = {
       id,
-      title: newToDoTitle,
-      description: "asd",
-      isCompleted: false,
-      status: "to_do"
+      ...ticket
     };
-    setToDos(prevState => [newToDo, ...prevState]);
-    setNewToDoTitle("");
+    setTicketsList(prevState => [newTicket, ...prevState]);
   };
 
   const createTicketsList = filter => {
-    const ticketList = toDos.filter(item => item.status === filter);
+    const ticketList = ticketsList.filter(item => item.status === filter);
     if (ticketList.length === 0) {
       return <p> Add more ticket to display them here </p>;
     } else {
@@ -33,24 +29,24 @@ export const ToDoAppProvider = ({ children }) => {
   };
 
   const deleteToDo = index => {
-    setToDos(toDos.filter(item => item.id !== index));
+    setTicketsList(ticketsList.filter(item => item.id !== index));
   };
 
-  const handleTextChange = e => {
-    const text = e.target.value;
-    setNewToDoTitle(text);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setTicket({ ...ticket, [name]: value });
   };
 
   return (
     <ToDoAppContext.Provider
       value={{
-        newToDoTitle,
-        toDos,
+        ticketsList,
         createTicketsList,
-        addToDo,
-        setNewToDoTitle,
+        addTicket,
         deleteToDo,
-        handleTextChange
+        handleChange,
+        ticket
       }}
     >
       {children}

@@ -6,16 +6,14 @@ import "./styles.css";
 
 const AddToDoModal = () => {
   const {
-    newToDoTitle,
-    handleTextChange,
-    createTicketsList,
-    addToDo,
-    setNewToDoTitle
+    handleChange,
+    addTicket,
+    ticket: { title, description }
   } = useToDoAppContext();
   const { isModalDisplayed, closeModal } = useGlobalContext();
 
   const handleTicketAddition = () => {
-    addToDo();
+    addTicket();
     closeModal();
   };
 
@@ -24,11 +22,24 @@ const AddToDoModal = () => {
       <h2>Add to do</h2>
       <div className="content">
         <form>
+          <label>Title</label>
+          <br />
           <input
             type="text"
             placeholder="What do you want to do?"
-            value={newToDoTitle}
-            onChange={handleTextChange}
+            value={title}
+            onChange={handleChange}
+            name="title"
+          />
+          <br />
+          <label>Description</label>
+          <br />
+          <textarea
+            type="textarea"
+            placeholder="Add description here"
+            value={description}
+            onChange={handleChange}
+            name="description"
           />
         </form>
       </div>

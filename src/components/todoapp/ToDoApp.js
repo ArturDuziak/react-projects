@@ -8,24 +8,23 @@ import { useGlobalContext } from "../GlobalContext";
 
 export const ToDoApp = () => {
   const {
-    newToDoTitle,
     createTicketsList,
-    addToDo,
-    toDos,
-    handleTextChange
+    ticketsList,
+    handleChange,
+    ticket: { title }
   } = useToDoAppContext();
   const { openModal, isModalDisplayed } = useGlobalContext();
 
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("toDosData", JSON.stringify(toDos));
-  }, [toDos]);
+    localStorage.setItem("toDosData", JSON.stringify(ticketsList));
+  }, [ticketsList]);
 
   const handleAddToDo = e => {
     e.preventDefault();
 
-    if (newToDoTitle) {
+    if (title) {
       openModal();
     } else {
       setIsInputErrorDisplayed(true);
@@ -39,8 +38,9 @@ export const ToDoApp = () => {
           <input
             type="text"
             placeholder="What do you want to do?"
-            value={isModalDisplayed ? "" : newToDoTitle}
-            onChange={handleTextChange}
+            name="title"
+            value={isModalDisplayed ? "" : title}
+            onChange={handleChange}
           />
           <button type="submit">
             <GoPlus />
