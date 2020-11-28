@@ -6,9 +6,13 @@ export const ToDoAppContext = React.createContext();
 
 export const ToDoAppProvider = ({ children }) => {
   const [ticketsList, setTicketsList] = useState(
-    JSON.parse(localStorage.getItem("TicketsListData")) || ToDoData.Tickets
+    JSON.parse(localStorage.getItem("ticketsData")) || ToDoData.Tickets
   );
-  const [ticket, setTicket] = useState({ title: "", description: "", status: "to_do" });
+  const [ticket, setTicket] = useState({
+    title: "",
+    description: "",
+    status: "to_do"
+  });
 
   const addTicket = () => {
     const id = new Date().getTime().toString();
@@ -17,6 +21,7 @@ export const ToDoAppProvider = ({ children }) => {
       ...ticket
     };
     setTicketsList(prevState => [newTicket, ...prevState]);
+    setTicketToDefault();
   };
 
   const createTicketsList = filter => {
@@ -32,10 +37,14 @@ export const ToDoAppProvider = ({ children }) => {
     setTicketsList(ticketsList.filter(item => item.id !== index));
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const name = e.target.name;
     const value = e.target.value;
     setTicket({ ...ticket, [name]: value });
+  };
+
+  const setTicketToDefault = () => {
+    setTicket({ title: "", description: "", status: "to_do" });
   };
 
   return (
@@ -46,6 +55,7 @@ export const ToDoAppProvider = ({ children }) => {
         addTicket,
         deleteToDo,
         handleChange,
+        setTicketToDefault,
         ticket
       }}
     >

@@ -11,14 +11,16 @@ export const ToDoApp = () => {
     createTicketsList,
     ticketsList,
     handleChange,
-    ticket: { title }
+    ticket: { title },
+    addTicket,
+    setTicketToDefault
   } = useToDoAppContext();
   const { openModal, isModalDisplayed } = useGlobalContext();
 
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("toDosData", JSON.stringify(ticketsList));
+    localStorage.setItem("ticketsData", JSON.stringify(ticketsList));
   }, [ticketsList]);
 
   const handleAddToDo = e => {
@@ -26,6 +28,15 @@ export const ToDoApp = () => {
 
     if (title) {
       openModal();
+    } else {
+      setIsInputErrorDisplayed(true);
+    }
+  };
+
+  const handleQuickAdd = () => {
+    if (title) {
+      addTicket();
+      setTicketToDefault();
     } else {
       setIsInputErrorDisplayed(true);
     }
@@ -44,6 +55,9 @@ export const ToDoApp = () => {
           />
           <button type="submit">
             <GoPlus />
+          </button>
+          <button type="button" onClick={handleQuickAdd}>
+            Quick add
           </button>
           <span className={`input-error ${isInputErrorDisplayed && "show"}`}>
             Value cannot be empty
