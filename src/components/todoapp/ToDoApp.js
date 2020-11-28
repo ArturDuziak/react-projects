@@ -4,6 +4,7 @@ import { useToDoAppContext } from "./ToDoAppContext";
 import AddToDoModal from "./AddToDoModal";
 
 import "./styles.css";
+import { useGlobalContext } from "../GlobalContext";
 
 export const ToDoApp = () => {
   const {
@@ -11,9 +12,10 @@ export const ToDoApp = () => {
     createTicketsList,
     addToDo,
     toDos,
-    openModal,
     handleTextChange
   } = useToDoAppContext();
+  const { openModal, isModalDisplayed } = useGlobalContext();
+
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export const ToDoApp = () => {
     e.preventDefault();
 
     if (newToDoTitle) {
-      addToDo();
+      openModal();
     } else {
       setIsInputErrorDisplayed(true);
     }
@@ -33,14 +35,14 @@ export const ToDoApp = () => {
   return (
     <div>
       <div className="add-todo-form">
-        <form>
+        <form onSubmit={handleAddToDo}>
           <input
             type="text"
             placeholder="What do you want to do?"
-            value={newToDoTitle}
+            value={isModalDisplayed ? "" : newToDoTitle}
             onChange={handleTextChange}
           />
-          <button type="button" onClick={openModal}>
+          <button type="submit">
             <GoPlus />
           </button>
           <span className={`input-error ${isInputErrorDisplayed && "show"}`}>

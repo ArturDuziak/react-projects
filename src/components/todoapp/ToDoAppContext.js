@@ -5,7 +5,6 @@ import ToDoData from "../../data/ToDoData.json";
 export const ToDoAppContext = React.createContext();
 
 export const ToDoAppProvider = ({ children }) => {
-  const [isModalDisplayed, setIsModalDisplayed] = useState(false);
   const [toDos, setToDos] = useState(
     JSON.parse(localStorage.getItem("toDosData")) || ToDoData.ToDos
   );
@@ -37,14 +36,6 @@ export const ToDoAppProvider = ({ children }) => {
     setToDos(toDos.filter(item => item.id !== index));
   };
 
-  const closeModal = () => {
-    setIsModalDisplayed(false);
-  };
-
-  const openModal = () => {
-    setIsModalDisplayed(true);
-  };
-
   const handleTextChange = e => {
     const text = e.target.value;
     setNewToDoTitle(text);
@@ -53,16 +44,12 @@ export const ToDoAppProvider = ({ children }) => {
   return (
     <ToDoAppContext.Provider
       value={{
-        isModalDisplayed,
         newToDoTitle,
         toDos,
         createTicketsList,
-        setIsModalDisplayed,
         addToDo,
         setNewToDoTitle,
         deleteToDo,
-        closeModal,
-        openModal,
         handleTextChange
       }}
     >
