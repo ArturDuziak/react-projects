@@ -47,6 +47,20 @@ export const ToDoAppProvider = ({ children }) => {
     setTicket({ title: "", description: "", status: "to_do" });
   };
 
+  const handleTicketEdit = (id, e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setTicketsList(
+      ticketsList.map(ticket => {
+        if (ticket.id === id) {
+          return { ...ticket, [name]: value };
+        }
+        return ticket;
+      })
+    );
+  };
+
   return (
     <ToDoAppContext.Provider
       value={{
@@ -56,6 +70,7 @@ export const ToDoAppProvider = ({ children }) => {
         deleteToDo,
         handleChange,
         setTicketToDefault,
+        handleTicketEdit,
         ticket
       }}
     >

@@ -10,7 +10,7 @@ const AddToDoModal = () => {
     addTicket,
     ticket: { title, description }
   } = useToDoAppContext();
-  const { isModalDisplayed, closeModal } = useGlobalContext();
+  const { closeModal } = useGlobalContext();
 
   const handleTicketAddition = () => {
     addTicket();
