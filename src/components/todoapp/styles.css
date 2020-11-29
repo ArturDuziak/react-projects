@@ -63,15 +63,37 @@
   color: red;
 }
 
-.todo-item span {
+.ticket-description > span {
   text-transform: capitalize;
   color: var(--clr-primary-3);
   cursor: pointer;
+}
+.ticket-title {
+  transition: all 0.1s linear;
+}
+
+.ticket-title:hover {
+  cursor: pointer;
+  color: var(--clr-primary-5);
+  margin-right: 5px;
+}
+
+.ticket-title:active {
+  color: var(--clr-primary-7);
+}
+
+.ticket-title > svg {
+  margin-left: 5px;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+}
+
+.ticket-title:hover > svg {
+  opacity: 1;
 }
 
 /* Modal section */
 .add-ticket-btn {
   background-color: pink;
 }
-
-
