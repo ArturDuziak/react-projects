@@ -12,6 +12,24 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
     navigator.clipboard.writeText(title[0].toUpperCase() + title.substring(1));
   };
 
+  const descriptionComponent = () => {
+    if (description.length < 150) {
+      return <span>{description}</span>;
+    } else if (description.length > 150) {
+      return (
+        <span>
+          {displayedMore ? description : `${description.substring(0, 150)}...`}
+          <span
+            onClick={() => setDisplayedMore(!displayedMore)}
+            className="text-length-toggle"
+          >
+            {displayedMore ? " Show less" : " Show more"}
+          </span>
+        </span>
+      );
+    }
+  };
+
   return (
     <div className="todo-item">
       <h3 onClick={copyTitle} className="ticket-title">
@@ -19,10 +37,7 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
         <BiCopyAlt />
       </h3>
       <p className="ticket-description">
-        {displayedMore ? description : `${description.substring(0, 150)}...`}
-        <span onClick={() => setDisplayedMore(!displayedMore)}>
-          {displayedMore ? " Show less" : " Show more"}
-        </span>
+        {descriptionComponent()}
         <select
           value={status}
           name="status"

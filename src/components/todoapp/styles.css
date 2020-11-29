@@ -63,11 +63,21 @@
   color: red;
 }
 
-.ticket-description > span {
+.text-length-toggle {
   text-transform: capitalize;
   color: var(--clr-primary-3);
   cursor: pointer;
+  transition: all 0.2s linear
 }
+
+.text-length-toggle:hover {
+  color: var(--clr-primary-6);
+}
+
+.text-length-toggle:active {
+  color: var(--clr-primary-4);
+}
+
 .ticket-title {
   transition: all 0.1s linear;
 }
