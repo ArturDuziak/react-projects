@@ -1,23 +1,27 @@
 import React, { useState, useContext } from "react";
 import ToDoItem from "./ToDoItem";
 import ToDoData from "../../data/ToDoData.json";
+import { useGlobalContext } from "../GlobalContext";
 
 export const ToDoAppContext = React.createContext();
 
 export const ToDoAppProvider = ({ children }) => {
+  const { openModal } = useGlobalContext();
   const [ticketsList, setTicketsList] = useState(
     JSON.parse(localStorage.getItem("ticketsData")) || ToDoData.Tickets
   );
   const [ticket, setTicket] = useState({
+    id: new Date().getTime().toString(),
     title: "",
     description: "",
     status: "to_do"
   });
+  const [isTicketEdited, setIsTicketEdited] = useState(false);
 
   const addTicket = () => {
-    const id = new Date().getTime().toString();
+    const ticketID = new Date().getTime().toString();
     const newTicket = {
-      id,
+      id: ticketID,
       ...ticket
     };
     setTicketsList(prevState => [newTicket, ...prevState]);
@@ -47,6 +51,31 @@ export const ToDoAppProvider = ({ children }) => {
     setTicket({ title: "", description: "", status: "to_do" });
   };
 
+  const setTicketToSpecificOne = id => {
+    const chosenTicket = ticketsList.find(ticket => {
+      return ticket.id === id;
+    });
+    setTicket(chosenTicket);
+  };
+
+  const openEditModal = id => {
+    setTicketToSpecificOne(id);
+    setIsTicketEdited(true);
+    openModal();
+  };
+
+  const editTicket = () => {
+    setTicketsList(
+      ticketsList.map(item => {
+        if (item.id === ticket.id) {
+          return { ...ticket };
+        }
+        return item;
+      })
+    );
+    setTicketToDefault();
+  };
+
   const handleTicketEdit = (id, e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -71,7 +100,11 @@ export const ToDoAppProvider = ({ children }) => {
         handleChange,
         setTicketToDefault,
         handleTicketEdit,
-        ticket
+        setTicketToSpecificOne,
+        openEditModal,
+        isTicketEdited,
+        ticket,
+        editTicket
       }}
     >
       {children}

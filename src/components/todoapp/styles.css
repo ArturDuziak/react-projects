@@ -24,6 +24,10 @@
   transition: ease-in;
 }
 
+.todo-item:hover {
+  background-color: var(--clr-grey-10);
+}
+
 .todo-item > h3 {
   text-transform: capitalize;
   margin-bottom: 3px;

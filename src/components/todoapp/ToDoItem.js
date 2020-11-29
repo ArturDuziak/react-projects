@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { BiTrash, BiCopyAlt } from "react-icons/bi";
+import { BiTrash, BiCopyAlt, BiEdit } from "react-icons/bi";
 import { useToDoAppContext } from "./ToDoAppContext";
 
 const ToDoItem = ({ id, title, description, isCompleted, status }) => {
   const { deleteToDo } = useToDoAppContext();
   const [displayedMore, setDisplayedMore] = useState(false);
-  const { handleTicketEdit } = useToDoAppContext();
+  const { handleTicketEdit, openEditModal } = useToDoAppContext();
 
   const copyTitle = () => {
     // TO DO: Add toasts or some message here about success
@@ -48,6 +48,7 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
           <option value="done">Done</option>
         </select>
       </p>
+      <BiEdit className="edit-ticket-button" onClick={() => openEditModal(id)} />
       <BiTrash
         className="delete-ticket-button"
         onClick={() => deleteToDo(id)}
