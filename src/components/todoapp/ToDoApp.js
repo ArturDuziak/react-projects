@@ -13,7 +13,7 @@ export const ToDoApp = () => {
     handleChange,
     ticket: { title },
     addTicket,
-    setTicketToDefault
+    setTicketToDefault,
   } = useToDoAppContext();
   const { openModal, isModalDisplayed } = useGlobalContext();
 
@@ -23,10 +23,11 @@ export const ToDoApp = () => {
     localStorage.setItem("ticketsData", JSON.stringify(ticketsList));
   }, [ticketsList]);
 
-  const handleAddToDo = e => {
+  const handleAddToDo = (e) => {
     e.preventDefault();
 
     if (title) {
+      setIsInputErrorDisplayed(false);
       openModal();
     } else {
       setIsInputErrorDisplayed(true);
@@ -35,6 +36,7 @@ export const ToDoApp = () => {
 
   const handleQuickAdd = () => {
     if (title) {
+      setIsInputErrorDisplayed(false);
       addTicket();
       setTicketToDefault();
     } else {

@@ -73,6 +73,7 @@ export const ToDoAppProvider = ({ children }) => {
         return item;
       })
     );
+    setIsTicketEdited(false);
     setTicketToDefault();
   };
 

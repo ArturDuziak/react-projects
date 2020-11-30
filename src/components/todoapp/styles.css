@@ -108,6 +108,15 @@
 }
 
 /* Modal section */
-.add-ticket-btn {
-  background-color: pink;
+.ticket-modal-form > p {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.ticket-modal-form > textarea {
+  resize: vertical;
+  width: 80%;
+  min-height: 150px;
+  max-height: 250px;
 }

@@ -8,9 +8,9 @@ const AddToDoModal = () => {
   const {
     handleChange,
     addTicket,
-    ticket: { id, title, description },
+    ticket: { id, title, description, status },
     isTicketEdited,
-    editTicket
+    editTicket,
   } = useToDoAppContext();
   const { closeModal } = useGlobalContext();
 
@@ -28,9 +28,8 @@ const AddToDoModal = () => {
     <Modal>
       <h2>{isTicketEdited ? "Edit ticket" : "Add ticket"}</h2>
       <div className="content">
-        <form>
-          <label>Title</label>
-          <br />
+        <form className="ticket-modal-form">
+          <p>Title {id}</p>
           <input
             type="text"
             placeholder="What do you want to do?"
@@ -38,9 +37,7 @@ const AddToDoModal = () => {
             onChange={handleChange}
             name="title"
           />
-          <br />
-          <label>Description</label>
-          <br />
+          <p>Description</p>
           <textarea
             type="textarea"
             placeholder="Add description here"
@@ -48,6 +45,12 @@ const AddToDoModal = () => {
             onChange={handleChange}
             name="description"
           />
+          <p>Status</p>
+          <select value={status} name="status" onChange={handleChange}>
+            <option value="to_do">To Do</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
         </form>
       </div>
       <div className="actions">
