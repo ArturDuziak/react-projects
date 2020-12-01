@@ -31,7 +31,7 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
   };
 
   return (
-    <div className="todo-item">
+    <div className="ticket-item">
       <h3 onClick={copyTitle} className="ticket-title">
         {title}
         <BiCopyAlt />
@@ -42,6 +42,7 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
           value={status}
           name="status"
           onChange={e => handleTicketEdit(id, e)}
+          className="ticket-status-toggle"
         >
           <option value="to_do">To Do</option>
           <option value="in_progress">In Progress</option>

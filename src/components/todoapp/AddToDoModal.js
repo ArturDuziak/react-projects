@@ -11,6 +11,7 @@ const AddToDoModal = () => {
     ticket: { id, title, description, status },
     isTicketEdited,
     editTicket,
+    setTicketToDefault,
   } = useToDoAppContext();
   const { closeModal } = useGlobalContext();
 
@@ -24,8 +25,14 @@ const AddToDoModal = () => {
     closeModal();
   };
 
+  // TO DO - maybe move this action and close button to generic modal component
+  const handleModalClose = () => {
+    setTicketToDefault();
+    closeModal();
+  };
+
   return (
-    <Modal>
+    <Modal onModalCloseAction={setTicketToDefault}>
       <h2>{isTicketEdited ? "Edit ticket" : "Add ticket"}</h2>
       <div className="content">
         <form className="ticket-modal-form">
@@ -60,7 +67,7 @@ const AddToDoModal = () => {
         >
           {isTicketEdited ? "Update ticket" : "Add ticket"}
         </button>
-        <button className="toggle-modal-button" onClick={closeModal}>
+        <button className="toggle-modal-button" onClick={handleModalClose}>
           close
         </button>
       </div>

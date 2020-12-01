@@ -46,7 +46,7 @@ export const ToDoApp = () => {
 
   return (
     <div>
-      <div className="add-todo-form">
+      <div className="add-ticket-form">
         <form onSubmit={handleAddToDo}>
           <input
             type="text"
