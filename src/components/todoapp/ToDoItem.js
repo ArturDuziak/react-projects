@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { BiTrash, BiCopyAlt, BiEdit } from "react-icons/bi";
 import { useToDoAppContext } from "./ToDoAppContext";
+import { useToasts } from "react-toast-notifications";
 
 const ToDoItem = ({ id, title, description, isCompleted, status }) => {
   const { deleteToDo } = useToDoAppContext();
   const [displayedMore, setDisplayedMore] = useState(false);
   const { handleTicketEdit, openEditModal } = useToDoAppContext();
+  const { addToast } = useToasts();
 
   const copyTitle = () => {
-    // TO DO: Add toasts or some message here about success
+    addToast("Title copied to clipboard successfuly", {
+      appearance: "success"
+    });
     navigator.clipboard.writeText(title[0].toUpperCase() + title.substring(1));
   };
 
@@ -41,7 +45,7 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
         <select
           value={status}
           name="status"
-          onChange={e => handleTicketEdit(id, e)}
+          onChange={(e) => handleTicketEdit(id, e)}
           className="ticket-status-toggle"
         >
           <option value="to_do">To Do</option>
@@ -49,7 +53,10 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
           <option value="done">Done</option>
         </select>
       </p>
-      <BiEdit className="edit-ticket-button" onClick={() => openEditModal(id)} />
+      <BiEdit
+        className="edit-ticket-button"
+        onClick={() => openEditModal(id)}
+      />
       <BiTrash
         className="delete-ticket-button"
         onClick={() => deleteToDo(id)}

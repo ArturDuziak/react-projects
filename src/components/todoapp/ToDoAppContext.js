@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import ToDoItem from "./ToDoItem";
 import ToDoData from "../../data/ToDoData.json";
 import { useGlobalContext } from "../GlobalContext";
+import { useToasts } from "react-toast-notifications";
 
 export const ToDoAppContext = React.createContext();
 
@@ -16,6 +17,7 @@ export const ToDoAppProvider = ({ children }) => {
     description: "",
     status: "to_do"
   });
+  const { addToast } = useToasts();
   const [isTicketEdited, setIsTicketEdited] = useState(false);
 
   const addTicket = () => {
@@ -26,6 +28,10 @@ export const ToDoAppProvider = ({ children }) => {
     };
     setTicketsList(prevState => [newTicket, ...prevState]);
     setTicketToDefault();
+
+    addToast("Ticket created successfully", {
+      appearance: "success",
+    });
   };
 
   const createTicketsList = filter => {
@@ -39,6 +45,10 @@ export const ToDoAppProvider = ({ children }) => {
 
   const deleteToDo = index => {
     setTicketsList(ticketsList.filter(item => item.id !== index));
+
+    addToast("Ticket deleted successfully", {
+      appearance: "success",
+    });
   };
 
   const handleChange = e => {
@@ -75,6 +85,10 @@ export const ToDoAppProvider = ({ children }) => {
     );
     setIsTicketEdited(false);
     setTicketToDefault();
+
+    addToast("Ticket updated successfully", {
+      appearance: "success",
+    });
   };
 
   const handleTicketEdit = (id, e) => {
@@ -89,6 +103,10 @@ export const ToDoAppProvider = ({ children }) => {
         return ticket;
       })
     );
+
+    addToast(`Ticket's ${name} was successfully edited`, {
+      appearance: "success",
+    });
   };
 
   return (

@@ -15,13 +15,8 @@ const AddToDoModal = () => {
   } = useToDoAppContext();
   const { closeModal } = useGlobalContext();
 
-  const handleTicketAddition = () => {
-    addTicket();
-    closeModal();
-  };
-
-  const handleTicketEdition = () => {
-    editTicket();
+  const handleModalSubmit = () => {
+    isTicketEdited ? editTicket() : addTicket();
     closeModal();
   };
 
@@ -61,10 +56,7 @@ const AddToDoModal = () => {
         </form>
       </div>
       <div className="actions">
-        <button
-          className="add-ticket-btn"
-          onClick={isTicketEdited ? handleTicketEdition : handleTicketAddition}
-        >
+        <button className="add-ticket-btn" onClick={handleModalSubmit}>
           {isTicketEdited ? "Update ticket" : "Add ticket"}
         </button>
         <button className="toggle-modal-button" onClick={handleModalClose}>

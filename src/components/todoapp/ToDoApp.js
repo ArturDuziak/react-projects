@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { useToDoAppContext } from "./ToDoAppContext";
 import AddToDoModal from "./AddToDoModal";
-
 import "./styles.css";
 import { useGlobalContext } from "../GlobalContext";
 

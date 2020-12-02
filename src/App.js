@@ -7,26 +7,29 @@ import { ErrorPage } from "./components/error-page/ErrorPage";
 import { NavbarTriggerButton } from "./components/navbar/NavbarTriggerButton";
 import { ToDoApp } from "./components/todoapp/ToDoApp";
 import { ToDoAppProvider } from "./components/todoapp/ToDoAppContext";
+import { ToastProvider } from "react-toast-notifications";
 
 function App() {
   return (
-    <Router>
-      <NavbarTriggerButton />
-      <Navbar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/TODO-App">
-          <ToDoAppProvider>
-            <ToDoApp />
-          </ToDoAppProvider>
-        </Route>
-        <Route path="*">
-          <ErrorPage />
-        </Route>
-      </Switch>
-    </Router>
+    <ToastProvider autoDismiss placement="bottom-right">
+      <Router>
+        <NavbarTriggerButton />
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/TODO-App">
+            <ToDoAppProvider>
+              <ToDoApp />
+            </ToDoAppProvider>
+          </Route>
+          <Route path="*">
+            <ErrorPage />
+          </Route>
+        </Switch>
+      </Router>
+    </ToastProvider>
   );
 }
 
