@@ -53,7 +53,6 @@
   box-shadow: 1rem 0 0 rgba(0, 0, 0, 0.2);
 }
 
-
 .modal-overlay {
   position: fixed;
   background: black;
@@ -66,4 +65,17 @@
 .modal.off + .modal-overlay {
   visibility: hidden;
   opacity: 0;
+}
+
+.close-modal-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
+  color: var(--clr-red-dark);
+  cursor: pointer;
+}
+
+.close-modal-button:hover {
+  color: var(--clr-red-light);
 }

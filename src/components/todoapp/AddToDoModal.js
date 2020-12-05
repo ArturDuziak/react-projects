@@ -20,12 +20,6 @@ const AddToDoModal = () => {
     closeModal();
   };
 
-  // TO DO - maybe move this action and close button to generic modal component
-  const handleModalClose = () => {
-    setTicketToDefault();
-    closeModal();
-  };
-
   return (
     <Modal onModalCloseAction={setTicketToDefault}>
       <h2>{isTicketEdited ? "Edit ticket" : "Add ticket"}</h2>
@@ -58,9 +52,6 @@ const AddToDoModal = () => {
       <div className="actions">
         <button className="add-ticket-btn" onClick={handleModalSubmit}>
           {isTicketEdited ? "Update ticket" : "Add ticket"}
-        </button>
-        <button className="toggle-modal-button" onClick={handleModalClose}>
-          close
         </button>
       </div>
     </Modal>
