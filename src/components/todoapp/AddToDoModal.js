@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "../GlobalContext";
 import { useToDoAppContext } from "./ToDoAppContext";
 import Modal from "../modal/Modal";
@@ -14,18 +14,26 @@ const AddToDoModal = () => {
     setTicketToDefault,
   } = useToDoAppContext();
   const { closeModal } = useGlobalContext();
+  const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
 
-  const handleModalSubmit = () => {
-    isTicketEdited ? editTicket() : addTicket();
-    closeModal();
+  const handleModalSubmit = (e) => {
+    e.preventDefault();
+
+    if (title) {
+      isTicketEdited ? editTicket() : addTicket();
+      setIsInputErrorDisplayed(false);
+      closeModal();
+    } else {
+      setIsInputErrorDisplayed(true);
+    }
   };
 
   return (
     <Modal onModalCloseAction={setTicketToDefault}>
       <h2>{isTicketEdited ? "Edit ticket" : "Add ticket"}</h2>
       <div className="content">
-        <form className="ticket-modal-form">
-          <p>Title {id}</p>
+        <form className="ticket-modal-form" onSubmit={handleModalSubmit}>
+          <p className="ticket-field-label">Title</p>
           <input
             type="text"
             placeholder="What do you want to do?"
@@ -33,7 +41,10 @@ const AddToDoModal = () => {
             onChange={handleChange}
             name="title"
           />
-          <p>Description</p>
+          <p className={`input-error title ${isInputErrorDisplayed && "show"}`}>
+            Title is required
+          </p>
+          <p className="ticket-field-label">Description</p>
           <textarea
             type="textarea"
             placeholder="Add description here"
@@ -41,7 +52,7 @@ const AddToDoModal = () => {
             onChange={handleChange}
             name="description"
           />
-          <p>Status</p>
+          <p className="ticket-field-label">Status</p>
           <select value={status} name="status" onChange={handleChange}>
             <option value="to_do">To Do</option>
             <option value="in_progress">In Progress</option>

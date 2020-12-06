@@ -15,7 +15,7 @@ export const ToDoAppProvider = ({ children }) => {
     id: new Date().getTime().toString(),
     title: "",
     description: "",
-    status: "to_do"
+    status: "to_do",
   });
   const { addToast } = useToasts();
   const [isTicketEdited, setIsTicketEdited] = useState(false);
@@ -24,9 +24,9 @@ export const ToDoAppProvider = ({ children }) => {
     const ticketID = new Date().getTime().toString();
     const newTicket = {
       id: ticketID,
-      ...ticket
+      ...ticket,
     };
-    setTicketsList(prevState => [newTicket, ...prevState]);
+    setTicketsList((prevState) => [newTicket, ...prevState]);
     setTicketToDefault();
 
     addToast("Ticket created successfully", {
@@ -34,24 +34,29 @@ export const ToDoAppProvider = ({ children }) => {
     });
   };
 
-  const createTicketsList = filter => {
-    const ticketList = ticketsList.filter(item => item.status === filter);
+  const createTicketsList = (filter) => {
+    const ticketList = ticketsList.filter((item) => item.status === filter);
     if (ticketList.length === 0) {
-      return <p> Add more ticket to display them here </p>;
+      return (
+        <p className="empty-column-text">
+          No tickets to display
+          <button onClick={openModal}>Add a Ticket</button>
+        </p>
+      );
     } else {
-      return ticketList.map(item => <ToDoItem key={item.id} {...item} />);
+      return ticketList.map((item) => <ToDoItem key={item.id} {...item} />);
     }
   };
 
-  const deleteToDo = index => {
-    setTicketsList(ticketsList.filter(item => item.id !== index));
+  const deleteToDo = (index) => {
+    setTicketsList(ticketsList.filter((item) => item.id !== index));
 
     addToast("Ticket deleted successfully", {
       appearance: "success",
     });
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setTicket({ ...ticket, [name]: value });
@@ -61,14 +66,14 @@ export const ToDoAppProvider = ({ children }) => {
     setTicket({ title: "", description: "", status: "to_do" });
   };
 
-  const setTicketToSpecificOne = id => {
-    const chosenTicket = ticketsList.find(ticket => {
+  const setTicketToSpecificOne = (id) => {
+    const chosenTicket = ticketsList.find((ticket) => {
       return ticket.id === id;
     });
     setTicket(chosenTicket);
   };
 
-  const openEditModal = id => {
+  const openEditModal = (id) => {
     setTicketToSpecificOne(id);
     setIsTicketEdited(true);
     openModal();
@@ -76,7 +81,7 @@ export const ToDoAppProvider = ({ children }) => {
 
   const editTicket = () => {
     setTicketsList(
-      ticketsList.map(item => {
+      ticketsList.map((item) => {
         if (item.id === ticket.id) {
           return { ...ticket };
         }
@@ -96,7 +101,7 @@ export const ToDoAppProvider = ({ children }) => {
     const value = e.target.value;
 
     setTicketsList(
-      ticketsList.map(ticket => {
+      ticketsList.map((ticket) => {
         if (ticket.id === id) {
           return { ...ticket, [name]: value };
         }
@@ -123,7 +128,7 @@ export const ToDoAppProvider = ({ children }) => {
         openEditModal,
         isTicketEdited,
         ticket,
-        editTicket
+        editTicket,
       }}
     >
       {children}
