@@ -12,6 +12,7 @@ const AddToDoModal = () => {
     isTicketEdited,
     editTicket,
     setTicketToDefault,
+    setIsTicketEdited
   } = useToDoAppContext();
   const { closeModal } = useGlobalContext();
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
@@ -28,8 +29,13 @@ const AddToDoModal = () => {
     }
   };
 
+  const onModalCloseAction = () => {
+    setIsTicketEdited(false);
+    setTicketToDefault()
+  }
+
   return (
-    <Modal onModalCloseAction={setTicketToDefault}>
+    <Modal onModalCloseAction={onModalCloseAction}>
       <h2>{isTicketEdited ? "Edit ticket" : "Add ticket"}</h2>
       <div className="content">
         <form className="ticket-modal-form" onSubmit={handleModalSubmit}>

@@ -129,6 +129,7 @@ export const ToDoAppProvider = ({ children }) => {
         isTicketEdited,
         ticket,
         editTicket,
+        setIsTicketEdited
       }}
     >
       {children}
