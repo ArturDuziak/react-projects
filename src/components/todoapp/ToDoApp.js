@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { GoPlus } from "react-icons/go";
 import { useToDoAppContext } from "./ToDoAppContext";
 import AddToDoModal from "./AddToDoModal";
 import "./styles.css";
@@ -53,16 +52,19 @@ export const ToDoApp = () => {
             name="title"
             value={isModalDisplayed ? "" : title}
             onChange={handleChange}
+            id="add-ticket-form-title-input"
           />
-          <button type="submit">
-            <GoPlus />
-          </button>
-          <button type="button" onClick={handleQuickAdd}>
-            Quick add
-          </button>
-          <span className={`input-error ${isInputErrorDisplayed && "show"}`}>
+          <p className={`input-error ${isInputErrorDisplayed && "show"}`}>
             Value cannot be empty
-          </span>
+          </p>
+          <div className="ticket-form-buttons">
+            <button type="submit">
+              Add a ticket
+            </button>
+            <button type="button" onClick={handleQuickAdd}>
+              Quick add
+            </button>
+          </div>
         </form>
       </div>
       <div className="lists-container">

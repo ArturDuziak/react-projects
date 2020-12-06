@@ -1,16 +1,62 @@
-.input-error {
+#add-ticket-form-title-input {
   display: block;
-  visibility: hidden;
-  color: var(--clr-red-light);
-  font-size: 12px;
-}
-
-.input-error.show {
-  visibility: visible;
+  font-size: 18px;
+  box-sizing: border-box;
+  width: 50%;
+  padding: 5px 0;
+  line-height: 1.33;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #4a4a4a;
+  color: #4a4a4a;
+  background-color: initial;
+  margin: auto;
+  outline: none;
 }
 
 .add-ticket-form {
   margin-left: 10px;
+}
+
+.ticket-form-buttons {
+  margin-top: 5px;
+  text-align: center;
+}
+
+.ticket-form-buttons > button {
+  cursor: pointer;
+}
+
+.ticket-form-buttons > [type="submit"] {
+  border: 0;
+  padding: 2px 2px;
+  margin-right: 15px;
+  width: 100px;
+  border-radius: 20px;
+  outline: none;
+  background-color: #78f89f;
+  transition: all 0.1s linear;
+}
+
+.ticket-form-buttons > [type="submit"]:hover {
+  background-color: #6fe492;
+}
+
+.ticket-form-buttons > [type="submit"]:active {
+  background-color: #78f89f;
+}
+
+.input-error {
+  display: none;
+  color: var(--clr-red-light);
+  font-size: 12px;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.input-error.show {
+  display: block;
 }
 
 .ticket-column {
@@ -25,6 +71,7 @@
 
 .lists-container {
   display: flex;
+  margin-top: 15px;
 }
 
 .ticket-column > h2 {
