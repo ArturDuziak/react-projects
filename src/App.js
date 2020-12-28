@@ -6,6 +6,7 @@ import { Home } from "./components/home/Home";
 import { ErrorPage } from "./components/error-page/ErrorPage";
 import { NavbarTriggerButton } from "./components/navbar/NavbarTriggerButton";
 import { ToDoApp } from "./components/todoapp/ToDoApp";
+import { MovieApp } from "./components/movieapp/MovieApp";
 import { ToDoAppProvider } from "./components/todoapp/ToDoAppContext";
 import { ToastProvider } from "react-toast-notifications";
 
@@ -19,11 +20,17 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/TODO-App">
+          <Route path="/todo-app">
             <ToDoAppProvider>
               <ToDoApp />
             </ToDoAppProvider>
           </Route>
+          {/* Fix me - i added it so the styles can be different in this specific app */}
+          <div id="movie-app">
+            <Route path="/movie-app">
+              <MovieApp />
+            </Route>
+          </div>
           <Route path="*">
             <ErrorPage />
           </Route>
