@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import default_poster from "../../assets/default_poster.jpg";
 
-const MovieList = ({ movies, favouriteComponent, handleFavouritesClick, isLoading, noMoviesFound }) => {
+const MovieList = ({
+  movies,
+  favouriteComponent,
+  handleFavouritesClick,
+  isLoading,
+  noMoviesFound,
+}) => {
   const FavouriteComponent = favouriteComponent;
 
   if (isLoading) {
@@ -9,7 +16,7 @@ const MovieList = ({ movies, favouriteComponent, handleFavouritesClick, isLoadin
   }
 
   if (noMoviesFound) {
-    return <div id="loader"> No movies found, try another name </div>
+    return <div id="loader"> No movies found, try another name </div>;
   }
 
   return (
@@ -20,7 +27,10 @@ const MovieList = ({ movies, favouriteComponent, handleFavouritesClick, isLoadin
           key={index}
           onClick={() => handleFavouritesClick(movie)}
         >
-          <img src={movie.Poster} alt="movie"></img>
+          <img
+            src={movie.Poster === "N/A" ? default_poster : movie.Poster}
+            alt={`${movie.Title} movie poster`}
+          ></img>
           <div className="movieoverlay d-flex align-items-center justify-content-center">
             <Link to={`/movie-app/movie/${movie.imdbID}`}>
               <svg
@@ -35,6 +45,9 @@ const MovieList = ({ movies, favouriteComponent, handleFavouritesClick, isLoadin
               </svg>
             </Link>
             <FavouriteComponent />
+          </div>
+          <div className="movietitleoverlay d-flex align-items-center justify-content-center">
+            <span>{movie.Title}</span>
           </div>
         </div>
       ))}

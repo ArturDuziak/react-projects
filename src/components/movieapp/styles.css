@@ -24,7 +24,7 @@
   transform: scale(1.1);
 }
 
-.image-container:hover > .movieoverlay {
+.image-container:hover > .movieoverlay, .image-container:hover > .movietitleoverlay {
   opacity: 1;
 }
 
@@ -54,4 +54,16 @@
 #loader {
   text-align: center;
   padding: 15px;
+}
+
+.movietitleoverlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 0.5s ease;
+  top: 0px;
+  opacity: 0;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
 }
