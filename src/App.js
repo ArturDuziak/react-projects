@@ -9,6 +9,7 @@ import { ToDoApp } from "./components/todoapp/ToDoApp";
 import { MovieApp } from "./components/movieapp/MovieApp";
 import { ToDoAppProvider } from "./components/todoapp/ToDoAppContext";
 import { ToastProvider } from "react-toast-notifications";
+import { MoviePage } from "./components/movieapp/MoviePage";
 
 function App() {
   return (
@@ -27,9 +28,13 @@ function App() {
           </Route>
           {/* Fix me - i added it so the styles can be different in this specific app */}
           <div id="movie-app">
-            <Route path="/movie-app">
+            <Route exact path="/movie-app">
               <MovieApp />
             </Route>
+            <Route
+              path="/movie-app/movie/:movieID"
+              children={<MoviePage />}
+            ></Route>
           </div>
           <Route path="*">
             <ErrorPage />

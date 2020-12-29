@@ -40,6 +40,17 @@
   text-align: center;
 }
 
+.movie-nav-button {
+  position: absolute;
+  right: 10px;
+  bottom: 80px;
+  transition: 0.3s ease-in;
+}
+
+.movie-nav-button:hover {
+  fill: lightgreen;
+}
+
 #loader {
   text-align: center;
   padding: 15px;

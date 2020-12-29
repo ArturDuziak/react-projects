@@ -28,7 +28,7 @@ export const MovieApp = () => {
     } else {
       setNoMoviesFound(true);
     }
-    setTimeout(setIsLoading(false), 2000);
+    setTimeout(() => setIsLoading(false), 1500);
   };
 
   const addFavouriteMovie = (movie) => {
@@ -60,17 +60,13 @@ export const MovieApp = () => {
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">
-        {isLoading ? (
-          <div id="loader"> Movies are loading... </div>
-        ) : noMoviesFound ? (
-          <div id="loader"> No movies found, try another name </div>
-        ) : (
-          <MovieList
-            movies={movies}
-            handleFavouritesClick={addFavouriteMovie}
-            favouriteComponent={AddFavourites}
-          />
-        )}
+        <MovieList
+          movies={movies}
+          handleFavouritesClick={addFavouriteMovie}
+          favouriteComponent={AddFavourites}
+          isLoading={isLoading}
+          noMoviesFound={noMoviesFound}
+        />
       </div>
       <div className="row d-flex align-items-center mt-4 mb-4">
         <MovieListHeading heading="Favorites" />
