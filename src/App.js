@@ -10,6 +10,7 @@ import { MovieApp } from "./components/movieapp/MovieApp";
 import { ToDoAppProvider } from "./components/todoapp/ToDoAppContext";
 import { ToastProvider } from "react-toast-notifications";
 import { MoviePage } from "./components/movieapp/MoviePage";
+import { TeslaRangeCalculator } from "./components/teslarangecalculator/TeslaRangeCalculator";
 
 function App() {
   return (
@@ -26,16 +27,16 @@ function App() {
               <ToDoApp />
             </ToDoAppProvider>
           </Route>
-          {/* Fix me - i added it so the styles can be different in this specific app */}
-          <div id="movie-app">
-            <Route exact path="/movie-app">
-              <MovieApp />
-            </Route>
-            <Route
-              path="/movie-app/movie/:movieID"
-              children={<MoviePage />}
-            ></Route>
-          </div>
+          <Route exact path="/movie-app">
+            <MovieApp />
+          </Route>
+          <Route
+            path="/movie-app/movie/:movieID"
+            children={<MoviePage />}
+          ></Route>
+          <Route path="/tesla-range-calculator">
+            <TeslaRangeCalculator />
+          </Route>
           <Route path="*">
             <ErrorPage />
           </Route>

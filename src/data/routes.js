@@ -7,6 +7,7 @@ import {
   FaClipboardList,
 } from "react-icons/fa";
 import { MdMovie } from "react-icons/md"
+import { SiTesla } from "react-icons/si"
 
 export const pages = [
   {
@@ -26,6 +27,12 @@ export const pages = [
     url: "/movie-app",
     text: "Movie app",
     icon: <MdMovie />,
+  },
+  {
+    id: 4,
+    url: "/tesla-range-calculator",
+    text: "Tesla range calculator",
+    icon: <SiTesla />,
   },
 ];
 
