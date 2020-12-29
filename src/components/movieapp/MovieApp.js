@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import MovieList from "./MovieList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
@@ -6,6 +6,7 @@ import MovieListHeading from "./MovieListHeading";
 import SearchBox from "./SearchBox";
 import AddFavourites from "./AddFavourites";
 import RemoveFavourites from "./RemoveFavourites";
+import debounce from "lodash/debounce";
 
 export const MovieApp = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +17,7 @@ export const MovieApp = () => {
     JSON.parse(localStorage.getItem("favourite-movies")) || []
   );
 
-  const getMovieRequest = async () => {
+  const getMovieRequest = async (searchValue) => {
     const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=1cf5d3da`;
     setIsLoading(true);
 
@@ -28,7 +29,7 @@ export const MovieApp = () => {
     } else {
       setNoMoviesFound(true);
     }
-    setTimeout(() => setIsLoading(false), 1500);
+    setTimeout(() => setIsLoading(false), 800);
   };
 
   const addFavouriteMovie = (movie) => {
@@ -45,8 +46,13 @@ export const MovieApp = () => {
     setFavourites(newFavourites);
   };
 
+  const debounceSearch = useCallback(
+    debounce((value) => getMovieRequest(value), 1000),
+    []
+  );
+
   useEffect(() => {
-    getMovieRequest();
+    debounceSearch(searchValue);
   }, [searchValue]);
 
   useEffect(() => {
