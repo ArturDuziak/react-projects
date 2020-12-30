@@ -5,6 +5,7 @@ import TeslaCar from "../components/teslacar/TeslaCar";
 import TeslaStats from "../components/teslastats/TeslaStats";
 import TeslaCounter from "../components/teslacounter/TeslaCounter";
 import TeslaClimate from "../components/teslaclimate/TeslaClimate";
+import TeslaWheels from "../components/teslawheels/TeslaWheels";
 import { getModelData } from "../services/BatteryService";
 
 class TeslaBattery extends React.Component {
@@ -17,6 +18,7 @@ class TeslaBattery extends React.Component {
     this.decrement = this.decrement.bind(this);
     this.updateCounterState = this.updateCounterState.bind(this);
     this.handleChangeClimate = this.handleChangeClimate.bind(this);
+    this.handleChangeWheels = this.handleChangeWheels.bind(this);
 
     this.state = {
       carstats: [],
@@ -108,12 +110,19 @@ class TeslaBattery extends React.Component {
     this.setState({ config });
   }
 
+  handleChangeWheels(size) {
+    const config = { ...this.state.config };
+    config["wheels"] = size;
+    this.setState({ config });
+  }
+
   componentDidMount() {
     this.statsUpdate();
   }
 
   render() {
     const { config, carstats } = this.state;
+    
     return (
       <form className="tesla-battery">
         <h1>Range Per Charge</h1>
@@ -133,13 +142,17 @@ class TeslaBattery extends React.Component {
               increment={this.increment}
               decrement={this.decrement}
             />
+            <TeslaClimate
+              value={this.state.config.climate}
+              limit={this.state.config.temperature > 10}
+              handleChangeClimate={this.handleChangeClimate}
+            />
           </div>
+          <TeslaWheels
+            value={this.state.config.wheels}
+            handleChangeWheels={this.handleChangeWheels}
+          />
         </div>
-        <TeslaClimate
-          value={this.state.config.climate}
-          limit={this.state.config.temperature > 10}
-          handleChangeClimate={this.handleChangeClimate}
-        />
         <TeslaNotice />
       </form>
     );

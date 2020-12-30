@@ -2,14 +2,14 @@ import React from "react";
 import "./TeslaCar.css";
 import PropTypes from "prop-types";
 
-const TeslaCar = (props) => (
+const TeslaCar = ({ wheelsize }) => (
   <div className="tesla-car">
     <div className="tesla-wheels">
       <div
-        className={`tesla-wheel tesla-wheel--front tesla-wheel--${props.wheelsize}`}
+        className={`tesla-wheel tesla-wheel--front tesla-wheel--${wheelsize}`}
       ></div>
       <div
-        className={`tesla-wheel tesla-wheel--rear tesla-wheel--${props.wheelsize}`}
+        className={`tesla-wheel tesla-wheel--rear tesla-wheel--${wheelsize}`}
       ></div>
     </div>
   </div>
