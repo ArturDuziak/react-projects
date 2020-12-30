@@ -38,7 +38,9 @@ class TeslaBattery extends React.Component {
       ? (config["speed"] = newValue)
       : (config["temperature"] = newValue);
 
-    this.setState({ config });
+    this.setState({ config }, () => {
+      this.statsUpdate();
+    });
   }
 
   increment(e, title) {
@@ -107,13 +109,17 @@ class TeslaBattery extends React.Component {
   handleChangeClimate() {
     const config = { ...this.state.config };
     config["climate"] = !this.state.config.climate;
-    this.setState({ config });
+    this.setState({ config }, () => {
+      this.statsUpdate();
+    });
   }
 
   handleChangeWheels(size) {
     const config = { ...this.state.config };
     config["wheels"] = size;
-    this.setState({ config });
+    this.setState({ config }, () => {
+      this.statsUpdate();
+    });
   }
 
   componentDidMount() {
@@ -122,7 +128,7 @@ class TeslaBattery extends React.Component {
 
   render() {
     const { config, carstats } = this.state;
-    
+
     return (
       <form className="tesla-battery">
         <h1>Range Per Charge</h1>
