@@ -97,4 +97,4 @@ workflows:
       - build
       - checklint:
           requires: 
-            - one
+            - build
