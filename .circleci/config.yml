@@ -88,7 +88,8 @@ jobs:
     docker:
       - image: cimg/node:15.5.1
     steps:
-      - yarn lint
+      - run: yarn lint
+
 workflows:
   version: 2
   lint_and_build:
@@ -96,4 +97,4 @@ workflows:
       - build
       - checklint:
           requires: 
-            -one
+            - one
