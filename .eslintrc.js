@@ -18,5 +18,10 @@ module.exports = {
         "react"
     ],
     "rules": {
+        quotes: 0,
+        semi: 0,
+        failOnError: 0,
+        "no-unused-vars": "warn",
+        "react/prop-types": 0
     }
 };

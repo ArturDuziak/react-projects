@@ -91,6 +91,14 @@ jobs:
       - checkout
       - run: npm install
       - run: yarn lint
+  check_cypress:
+    docker:
+      - image: cimg/node:15.5.1
+    steps:
+      - checkout
+      - run: npm install
+      - run: yarn start
+      - run: yarn cypress:run
 
 workflows:
   version: 2
@@ -100,3 +108,6 @@ workflows:
       - checklint:
           requires: 
             - build
+      - check_cypress:
+          requires:
+            - checklint
