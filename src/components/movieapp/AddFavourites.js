@@ -1,8 +1,8 @@
 
 import React from 'react';
 
-const AddFavourite = ({onClick}) => {
-	return (
+const AddFavourite = ({ onClick }) => {
+  return (
 		<>
 			<span onClick={onClick} className='mr-2'>Add to Favourites</span>
 			<svg
@@ -19,7 +19,7 @@ const AddFavourite = ({onClick}) => {
 				/>
 			</svg>
 		</>
-	);
+  );
 };
 
 export default AddFavourite;

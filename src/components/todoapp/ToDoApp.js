@@ -11,7 +11,7 @@ export const ToDoApp = () => {
     handleChange,
     ticket: { title },
     addTicket,
-    setTicketToDefault,
+    setTicketToDefault
   } = useToDoAppContext();
   const { openModal, isModalDisplayed } = useGlobalContext();
 

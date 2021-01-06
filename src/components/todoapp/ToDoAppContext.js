@@ -15,7 +15,7 @@ export const ToDoAppProvider = ({ children }) => {
     id: new Date().getTime().toString(),
     title: "",
     description: "",
-    status: "to_do",
+    status: "to_do"
   });
   const { addToast } = useToasts();
   const [isTicketEdited, setIsTicketEdited] = useState(false);
@@ -24,13 +24,13 @@ export const ToDoAppProvider = ({ children }) => {
     const ticketID = new Date().getTime().toString();
     const newTicket = {
       id: ticketID,
-      ...ticket,
+      ...ticket
     };
     setTicketsList((prevState) => [newTicket, ...prevState]);
     setTicketToDefault();
 
     addToast("Ticket created successfully", {
-      appearance: "success",
+      appearance: "success"
     });
   };
 
@@ -52,7 +52,7 @@ export const ToDoAppProvider = ({ children }) => {
     setTicketsList(ticketsList.filter((item) => item.id !== index));
 
     addToast("Ticket deleted successfully", {
-      appearance: "success",
+      appearance: "success"
     });
   };
 
@@ -92,7 +92,7 @@ export const ToDoAppProvider = ({ children }) => {
     setTicketToDefault();
 
     addToast("Ticket updated successfully", {
-      appearance: "success",
+      appearance: "success"
     });
   };
 
@@ -110,7 +110,7 @@ export const ToDoAppProvider = ({ children }) => {
     );
 
     addToast(`Ticket's ${name} was successfully edited`, {
-      appearance: "success",
+      appearance: "success"
     });
   };
 

@@ -19,9 +19,9 @@ describe("Checks deleteing TO DO", () => {
   it.only("checks stackin site", () => {
     cy.visit("https://app.staging.stackin.com/");
 
-    cy.contains("Get more from your money with products we believe in").should(
-      "be.visible"
-    );
+    // cy.contains("Get more from your money with products we believe in").should(
+    //   "be.visible"
+    // );
 
     const thresholds = {
       performance: 10,

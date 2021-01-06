@@ -6,7 +6,7 @@ const LabelLists = ({ wheels }) => {
   const value = wheels.value;
   const changeHandler = wheels.handleChangeWheels;
   const sizes = [19, 21];
-  
+
   const LabelItems = sizes.map((size) => (
     <label
       key={size}
@@ -40,7 +40,7 @@ const TeslaWheels = (props) => (
 
 TeslaWheels.propTypes = {
   value: PropTypes.number,
-  handleChangeWheels: PropTypes.func,
+  handleChangeWheels: PropTypes.func
 };
 
 export default TeslaWheels;

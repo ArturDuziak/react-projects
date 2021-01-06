@@ -7,7 +7,7 @@ const MovieList = ({
   favouriteComponent,
   handleFavouritesClick,
   isLoading,
-  noMoviesFound,
+  noMoviesFound
 }) => {
   const FavouriteComponent = favouriteComponent;
 

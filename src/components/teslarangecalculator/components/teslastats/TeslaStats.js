@@ -12,7 +12,7 @@ const TeslaStats = (props) => {
   return (
     <div className="tesla-stats">
     <ul>
-      {listItems}  
+      {listItems}
     </ul>
   </div>
   )

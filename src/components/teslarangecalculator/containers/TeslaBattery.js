@@ -13,7 +13,7 @@ const TeslaBattery = (props) => {
     speed: 55,
     temperature: 20,
     climate: true,
-    wheels: 19,
+    wheels: 19
   });
   const [carstats, setCarstats] = useState([]);
 
@@ -21,8 +21,8 @@ const TeslaBattery = (props) => {
     const newConfig = { ...config };
 
     title === "Speed"
-      ? (newConfig["speed"] = newValue)
-      : (newConfig["temperature"] = newValue);
+      ? (newConfig.speed = newValue)
+      : (newConfig.temperature = newValue);
 
     setConfig(newConfig);
   };
@@ -77,7 +77,7 @@ const TeslaBattery = (props) => {
         ];
       return {
         model,
-        miles,
+        miles
       };
     });
   };
@@ -91,13 +91,13 @@ const TeslaBattery = (props) => {
 
   const handleChangeClimate = () => {
     const newConfig = { ...config };
-    newConfig["climate"] = !config.climate;
+    newConfig.climate = !config.climate;
     setConfig(newConfig);
   };
 
   const handleChangeWheels = (size) => {
     const newConfig = { ...config };
-    newConfig["wheels"] = size;
+    newConfig.wheels = size;
     setConfig(newConfig);
   };
 

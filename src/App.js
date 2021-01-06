@@ -12,7 +12,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { MoviePage } from "./components/movieapp/MoviePage";
 import { TeslaRangeCalculator } from "./components/teslarangecalculator/TeslaRangeCalculator";
 
-function App() {
+function App () {
   return (
     <ToastProvider autoDismiss placement="bottom-right">
       <Router>

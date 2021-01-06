@@ -28,7 +28,7 @@ const TeslaClimate = ({ value, limit, handleChangeClimate }) => (
 TeslaClimate.propTypes = {
   value: PropTypes.bool,
   limit: PropTypes.bool,
-  handleChangeClimate: PropTypes.func,
+  handleChangeClimate: PropTypes.func
 };
 
 export default TeslaClimate;
