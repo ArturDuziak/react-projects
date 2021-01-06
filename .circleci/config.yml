@@ -96,8 +96,10 @@ jobs:
       - image: cimg/node:15.5.1
     steps:
       - checkout
-      - run: npm install
-      - run: yarn start && yarn run wait-on http://localhost:3000 && echo local server ready! && yarn cypress:run
+      - run: 
+          command: npm install && npm start
+          background: true
+      - run: yarn run wait-on http://localhost:3000 && echo local server ready! && yarn cypress:run
 
 workflows:
   version: 2
