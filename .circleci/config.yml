@@ -97,7 +97,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: yarn start & yarn run wait-on http://localhost:3000 && echo local server ready! && yarn cypress:run
+      - run: yarn start && yarn run wait-on http://localhost:3000 && echo local server ready! && yarn cypress:run
 
 workflows:
   version: 2
