@@ -93,7 +93,7 @@ jobs:
       - run: yarn lint
   check_cypress:
     docker:
-      - image: cimg/node:15.5.1
+      - image: cypress/browsers:node12.8.1-chrome78-ff70
     steps:
       - checkout
       - run: npm install
