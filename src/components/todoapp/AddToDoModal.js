@@ -8,7 +8,7 @@ const AddToDoModal = () => {
   const {
     handleChange,
     addTicket,
-    ticket: { id, title, description, status },
+    ticket: { title, description, status },
     isTicketEdited,
     editTicket,
     setTicketToDefault,

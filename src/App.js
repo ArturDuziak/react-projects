@@ -30,10 +30,9 @@ function App () {
           <Route exact path="/movie-app">
             <MovieApp />
           </Route>
-          <Route
-            path="/movie-app/movie/:movieID"
-            children={<MoviePage />}
-          ></Route>
+          <Route path="/movie-app/movie/:movieID">
+            <MoviePage />
+          </Route>
           <Route path="/tesla-range-calculator">
             <TeslaRangeCalculator />
           </Route>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import default_poster from "../../assets/default_poster.jpg";
+import defaultPoster from "../../assets/defaultPoster.jpg";
 
 export const MoviePage = () => {
   const { movieID } = useParams();
@@ -29,7 +29,7 @@ export const MoviePage = () => {
   if (movieNotFound) {
     return (
       <div>
-        It seems that movie with this ID wasn't found
+        It seems that movie with this ID was not found
         <Link to="/movie-app">Go back</Link>
       </div>
     );
@@ -45,7 +45,7 @@ export const MoviePage = () => {
     <div className="movie-page-container">
       <div>
         <Link to="/movie-app">Go back</Link>
-        <img src={Poster === "N/A" ? default_poster : movie.Poster}></img>
+        <img src={Poster === "N/A" ? defaultPoster : movie.Poster}></img>
         <p>Title: {Title}</p>
         <p>Year of premier: {Year}</p>
         <p>Actors: {Actors}</p>

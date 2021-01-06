@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "react";
+import PropTypes from "prop-types";
 import "./TeslaWheels.css";
 
 const LabelLists = ({ wheels }) => {
@@ -23,7 +23,7 @@ const LabelLists = ({ wheels }) => {
           changeHandler(size);
         }}
       />
-      <p>{size}"</p>
+      <p>{size}&quot;</p>
     </label>
   ));
   return <div>{LabelItems}</div>;
@@ -44,5 +44,3 @@ TeslaWheels.propTypes = {
 };
 
 export default TeslaWheels;
-
-// className={`tesla-wheels__item tesla-wheels__item--${size} ${value === size ? 'tesla-wheels__item--active' : '}`}

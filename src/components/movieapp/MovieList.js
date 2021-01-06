@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import default_poster from "../../assets/default_poster.jpg";
+import defaultPoster from "../../assets/defaultPoster.jpg";
 
 const MovieList = ({
   movies,
@@ -28,7 +28,7 @@ const MovieList = ({
           onClick={() => handleFavouritesClick(movie)}
         >
           <img
-            src={movie.Poster === "N/A" ? default_poster : movie.Poster}
+            src={movie.Poster === "N/A" ? defaultPoster : movie.Poster}
             alt={`${movie.Title} movie poster`}
           ></img>
           <div className="movieoverlay d-flex align-items-center justify-content-center">

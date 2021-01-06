@@ -36,7 +36,7 @@ export const Navbar = () => {
             const { id, url, icon } = item;
             return (
               <li key={id}>
-                <a href={url} target="_blank">
+                <a href={url} target="_blank" rel="noreferrer">
                   {icon}
                 </a>
               </li>
