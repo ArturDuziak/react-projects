@@ -11,7 +11,7 @@ export const ToDoApp = () => {
     handleChange,
     ticket: { title },
     addTicket,
-    setTicketToDefault
+    setTicketToDefault,
   } = useToDoAppContext();
   const { openModal, isModalDisplayed } = useGlobalContext();
 
@@ -53,30 +53,38 @@ export const ToDoApp = () => {
             value={isModalDisplayed ? "" : title}
             onChange={handleChange}
             id="add-ticket-form-title-input"
+            data-cy="ticket-title-input"
           />
-          <p className={`input-error ${isInputErrorDisplayed && "show"}`}>
+          <p
+            className={`input-error ${isInputErrorDisplayed && "show"}`}
+            data-cy="title-input-error"
+          >
             Value cannot be empty
           </p>
           <div className="ticket-form-buttons">
-            <button type="submit">
+            <button type="submit" data-cy="add-ticket-btn">
               Add a ticket
             </button>
-            <button type="button" onClick={handleQuickAdd}>
+            <button
+              type="button"
+              data-cy="quick-add-ticket-btn"
+              onClick={handleQuickAdd}
+            >
               Quick add
             </button>
           </div>
         </form>
       </div>
       <div className="lists-container">
-        <div className="ticket-column">
+        <div className="ticket-column" data-cy="todo-column">
           <h2>TO DO</h2>
           {createTicketsList("to_do")}
         </div>
-        <div className="ticket-column">
+        <div className="ticket-column" data-cy="inprogress-column">
           <h2>IN PROGRESS</h2>
           {createTicketsList("in_progress")}
         </div>
-        <div className="ticket-column">
+        <div className="ticket-column" data-cy="done-column">
           <h2>DONE</h2>
           {createTicketsList("done")}
         </div>

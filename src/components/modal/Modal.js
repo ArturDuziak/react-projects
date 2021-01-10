@@ -12,10 +12,26 @@ const Modal = ({ children, onModalCloseAction }) => {
   };
 
   return (
-    <div className="modal-container">
-      <div className={`${isModalDisplayed ? "modal" : "modal off"}`} id="modal">
-        {children}
-        <FaTimes className="close-modal-button" onClick={handleModalClose} />
+    <div
+      className={`modal fade${isModalDisplayed ? " show" : ""}`}
+      id="modal-container"
+      style={isModalDisplayed ? { display: "block" } : { display: "none" }}
+    >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <button
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onClick={handleModalClose}
+            >
+              <FaTimes className="close-modal-button" />
+            </button>
+          </div>
+          <div className="modal-body">{children}</div>
+        </div>
       </div>
       <div className="modal-overlay" onClick={handleModalClose} />
     </div>

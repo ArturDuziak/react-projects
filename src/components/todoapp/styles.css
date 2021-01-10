@@ -237,3 +237,7 @@
 .input-error.title {
   text-align: left;
 }
+
+.add-ticket-btn {
+  margin-top: 10px;
+}

@@ -9,7 +9,7 @@ export const ToDoAppContext = React.createContext();
 export const ToDoAppProvider = ({ children }) => {
   const { openModal } = useGlobalContext();
   const [ticketsList, setTicketsList] = useState(
-    JSON.parse(localStorage.getItem("ticketsData")) || ToDoData.Tickets
+    JSON.parse(localStorage.getItem("ticketsData")) || []
   );
   const [ticket, setTicket] = useState({
     id: new Date().getTime().toString(),
