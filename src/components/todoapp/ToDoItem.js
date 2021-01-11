@@ -3,7 +3,7 @@ import { BiTrash, BiCopyAlt, BiEdit } from "react-icons/bi";
 import { useToDoAppContext } from "./ToDoAppContext";
 import { useToasts } from "react-toast-notifications";
 
-const ToDoItem = ({ id, title, description, isCompleted, status }) => {
+const ToDoItem = ({ id, title, description, status }) => {
   const { deleteToDo } = useToDoAppContext();
   const [displayedMore, setDisplayedMore] = useState(false);
   const { handleTicketEdit, openEditModal } = useToDoAppContext();
@@ -35,7 +35,7 @@ const ToDoItem = ({ id, title, description, isCompleted, status }) => {
   };
 
   return (
-    <div className="ticket-item">
+    <div className="ticket-item" data-cy="ticket-item">
       <h3 onClick={copyTitle} className="ticket-title">
         {title}
         <BiCopyAlt />

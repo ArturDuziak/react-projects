@@ -18,7 +18,7 @@ const Modal = ({ children, onModalCloseAction }) => {
       style={isModalDisplayed ? { display: "block" } : { display: "none" }}
     >
       <div className="modal-dialog modal-dialog-centered" role="document">
-        <div className="modal-content">
+        <div className="modal-content" data-cy="modal-content">
           <div className="modal-header">
             <button
               type="button"
@@ -26,6 +26,7 @@ const Modal = ({ children, onModalCloseAction }) => {
               data-dismiss="modal"
               aria-label="Close"
               onClick={handleModalClose}
+              data-cy="modal-close-btn"
             >
               <FaTimes className="close-modal-button" />
             </button>
@@ -33,7 +34,11 @@ const Modal = ({ children, onModalCloseAction }) => {
           <div className="modal-body">{children}</div>
         </div>
       </div>
-      <div className="modal-overlay" onClick={handleModalClose} />
+      <div
+        className="modal-overlay"
+        data-cy="modal-overlay"
+        onClick={handleModalClose}
+      />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const AddToDoModal = () => {
     isTicketEdited,
     editTicket,
     setTicketToDefault,
-    setIsTicketEdited
+    setIsTicketEdited,
   } = useToDoAppContext();
   const { closeModal } = useGlobalContext();
   const [isInputErrorDisplayed, setIsInputErrorDisplayed] = useState(false);
@@ -31,12 +31,14 @@ const AddToDoModal = () => {
 
   const onModalCloseAction = () => {
     setIsTicketEdited(false);
-    setTicketToDefault()
-  }
+    setTicketToDefault();
+  };
 
   return (
     <Modal onModalCloseAction={onModalCloseAction}>
-      <h2>{isTicketEdited ? "Edit ticket" : "Add ticket"}</h2>
+      <h2 data-cy="modal-title">
+        {isTicketEdited ? "Edit ticket" : "Add ticket"}
+      </h2>
       <div className="content">
         <form className="ticket-modal-form" onSubmit={handleModalSubmit}>
           <p className="ticket-field-label">Title</p>
@@ -46,8 +48,12 @@ const AddToDoModal = () => {
             value={title}
             onChange={handleChange}
             name="title"
+            data-cy="modal-title-input"
           />
-          <p className={`input-error title ${isInputErrorDisplayed && "show"}`}>
+          <p
+            className={`input-error title ${isInputErrorDisplayed && "show"}`}
+            data-cy="modal-title-input-error"
+          >
             Title is required
           </p>
           <p className="ticket-field-label">Description</p>
@@ -57,9 +63,15 @@ const AddToDoModal = () => {
             value={description}
             onChange={handleChange}
             name="description"
+            data-cy="modal-description-textarea"
           />
           <p className="ticket-field-label">Status</p>
-          <select value={status} name="status" onChange={handleChange}>
+          <select
+            value={status}
+            name="status"
+            onChange={handleChange}
+            data-cy="modal-status-select"
+          >
             <option value="to_do">To Do</option>
             <option value="in_progress">In Progress</option>
             <option value="done">Done</option>
@@ -67,7 +79,11 @@ const AddToDoModal = () => {
         </form>
       </div>
       <div className="actions">
-        <button className="add-ticket-btn" onClick={handleModalSubmit}>
+        <button
+          className="add-ticket-btn"
+          onClick={handleModalSubmit}
+          data-cy="modal-submit-button"
+        >
           {isTicketEdited ? "Update ticket" : "Add ticket"}
         </button>
       </div>
