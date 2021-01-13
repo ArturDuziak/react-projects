@@ -129,10 +129,7 @@ executors:
   node-machine:
     working_directory: << pipeline.parameters.repo_path >>
     docker:
-      - image: circleci/12.18.3
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
+      - image: circleci/node:12.18.3
 
 jobs:
   checkout_code:
