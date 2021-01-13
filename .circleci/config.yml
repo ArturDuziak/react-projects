@@ -180,7 +180,14 @@ workflows:
       - lint:
           requires:
             - install_dependencies
-      - cypress/run:
+      - cypress/install:
           requires:
             - lint
+      - cypress/run:
+          requires:
+            - cypress/install
+          attach-workspace: true
+          yarn: true
+          start: npm start
+          wait-on: "http://localhost:3000"
           store_artifacts: true
