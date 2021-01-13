@@ -4,14 +4,14 @@ class ToDoAppPage {
   }
 
   visitUrl() {
-    return cy.visit(this.url);
+    return cy.visit(this.url());
   }
 
-  addTicketBtn() {
+  addTicketButton() {
     return cy.get('[data-cy="add-ticket-btn"]');
   }
 
-  quickAddTicketBtn() {
+  quickAddTicketButton() {
     return cy.get('[data-cy="quick-add-ticket-btn"]');
   }
 
@@ -21,6 +21,14 @@ class ToDoAppPage {
 
   ticketTitleInputError() {
     return cy.get('[data-cy="title-input-error"]');
+  }
+
+  ticketTitle() {
+    return cy.get('[data-cy="ticket-title"]');
+  }
+
+  ticketDescription() {
+    return cy.get('[data-cy="ticket-description"]');
   }
 
   todoColumn() {
@@ -45,6 +53,10 @@ class ToDoAppPage {
 
   modalSubmitButton() {
     return cy.get('[data-cy="modal-submit-button"]');
+  }
+
+  clickModalSubmitButton() {
+    return cy.get('[data-cy="modal-submit-button"]').click();
   }
 
   modalTitle() {
@@ -75,8 +87,28 @@ class ToDoAppPage {
     this.modalCloseButton().click();
   }
 
-  emptyColumnAddTicketBtn() {
+  emptyColumnAddTicketButton() {
     return cy.get('[data-cy="empty-column-btn"]');
+  }
+
+  deleteTicketButton() {
+    return cy.get('[data-cy="delete-ticket-button"]');
+  }
+
+  clickDeleteTicketButton() {
+    return cy.get('[data-cy="delete-ticket-button"]').click();
+  }
+
+  editTicketButton() {
+    return cy.get('[data-cy="edit-ticket-button"]');
+  }
+
+  clickEditTicketButton() {
+    return cy.get('[data-cy="edit-ticket-button"]').click();
+  }
+
+  ticketStatusSelect() {
+    return cy.get('[data-cy="ticket-status-toggle"]');
   }
 }
 

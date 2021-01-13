@@ -11,7 +11,7 @@ const ToDoItem = ({ id, title, description, status }) => {
 
   const copyTitle = () => {
     addToast("Title copied to clipboard successfuly", {
-      appearance: "success"
+      appearance: "success",
     });
     navigator.clipboard.writeText(title[0].toUpperCase() + title.substring(1));
   };
@@ -36,29 +36,32 @@ const ToDoItem = ({ id, title, description, status }) => {
 
   return (
     <div className="ticket-item" data-cy="ticket-item">
-      <h3 onClick={copyTitle} className="ticket-title">
+      <h3 onClick={copyTitle} className="ticket-title" data-cy="ticket-title">
         {title}
         <BiCopyAlt />
       </h3>
-      <p className="ticket-description">
+      <p className="ticket-description" data-cy="ticket-description">
         {descriptionComponent()}
-        <select
-          value={status}
-          name="status"
-          onChange={(e) => handleTicketEdit(id, e)}
-          className="ticket-status-toggle"
-        >
-          <option value="to_do">To Do</option>
-          <option value="in_progress">In Progress</option>
-          <option value="done">Done</option>
-        </select>
       </p>
+      <select
+        value={status}
+        name="status"
+        onChange={(e) => handleTicketEdit(id, e)}
+        className="ticket-status-toggle"
+        data-cy="ticket-status-toggle"
+      >
+        <option value="to_do">To Do</option>
+        <option value="in_progress">In Progress</option>
+        <option value="done">Done</option>
+      </select>
       <BiEdit
         className="edit-ticket-button"
+        data-cy="edit-ticket-button"
         onClick={() => openEditModal(id)}
       />
       <BiTrash
         className="delete-ticket-button"
+        data-cy="delete-ticket-button"
         onClick={() => deleteToDo(id)}
       />
     </div>

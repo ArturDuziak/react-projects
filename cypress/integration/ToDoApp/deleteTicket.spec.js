@@ -1,39 +1,28 @@
-describe("Checks deleteing TO DO", () => {
-  it("checks", () => {
-    cy.visit("/todo-app");
-    cy.get('[class="ticket-title"]')
-      .first()
-      .invoke("text")
-      .should("eq", "Title of first ticket");
+import ToDoAppPage from "../../support/pages/toDoApp/toDoAppPage";
+import { getToast } from "../../support/shared/toastElement";
 
-    cy.lighthouse();
+const todoAppPage = new ToDoAppPage();
 
-    cy.log("test");
+describe("Checks deleteing tickets function", () => {
+  beforeEach(() => {
+    cy.fixture("todoApp/oneTicketInToDo.json").then(({ key, value }) => {
+      window.localStorage.setItem(key, value);
+    });
 
-    cy.get('[class="ticket-title"]')
-      .first()
-      .invoke("text")
-      .should("eq", "Title of first ticket");
+    todoAppPage.visitUrl();
   });
 
-  it.only("checks stackin site", () => {
-    cy.visit("https://app.staging.stackin.com/");
+  it("User can delete ticket using delete button", () => {
+    todoAppPage.todoColumn().should("have.length", 1);
+    todoAppPage.todoColumn().within(() => {
+      cy.contains("Ticket title");
+    });
+    
+    todoAppPage.clickDeleteTicketButton();
 
-    // cy.contains("Get more from your money with products we believe in").should(
-    //   "be.visible"
-    // );
-
-    const thresholds = {
-      performance: 10,
-      accessibility: 80,
-      seo: 60,
-      pwa: 50,
-    };
-
-    const lighthouseConfig = {
-      preset: 'desktop',
-    };
-
-    cy.lighthouse(thresholds, lighthouseConfig);
+    todoAppPage
+      .todoColumn()
+      .within(() => cy.get('[data-cy="ticket-item"]').should("not.exist"));
+    getToast().contains("Ticket deleted successfully")
   });
 });
