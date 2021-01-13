@@ -17,12 +17,12 @@ describe("Checks deleteing tickets function", () => {
     todoAppPage.todoColumn().within(() => {
       cy.contains("Ticket title");
     });
-    
+
     todoAppPage.clickDeleteTicketButton();
 
     todoAppPage
       .todoColumn()
       .within(() => cy.get('[data-cy="ticket-item"]').should("not.exist"));
-    getToast().contains("Ticket deleted successfully")
+    getToast().contains("Ticket deleted successfully");
   });
 });
