@@ -119,6 +119,12 @@ version: 2.1
 orbs:
   cypress: cypress-io/cypress@1.26.0
 
+parameters:
+  repo_path:
+    description: the path where the repository is cloned into
+    type: string
+    default: ~/repo
+
 executors:
   node-machine:
     working_directory: << pipeline.parameters.repo_path >>
