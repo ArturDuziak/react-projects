@@ -129,7 +129,7 @@ executors:
   node-machine:
     working_directory: << pipeline.parameters.repo_path >>
     docker:
-      - image: circleci/node:12.1.0-stretch
+      - image: circleci/12.18.3-browsers
 
 jobs:
   checkout_code:
