@@ -150,13 +150,36 @@ jobs:
           name: Run linter
           command: yarn run lint
 
+  install_dependencies:
+    executor: node-machine
+    steps:
+      - attach_workspace:
+          at: << pipeline.parameters.repo_path >>
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies based on lockfile
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace:
+          root: << pipeline.parameters.repo_path >>
+          paths:
+            - node_modules
+
 workflows:
   build:
     jobs:
       - checkout_code
-      - lint:
+      - install_dependencies
           requires:
             - checkout_code
+      - lint:
+          requires:
+            - install_dependencies
       - cypress/run:
           requires:
             - lint
