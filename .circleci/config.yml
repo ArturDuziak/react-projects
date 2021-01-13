@@ -130,9 +130,9 @@ executors:
     working_directory: << pipeline.parameters.repo_path >>
     docker:
       - image: circleci/12.18.3
-      auth:
-        username: mydockerhub-user
-        password: $DOCKERHUB_PASSWORD
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD
 
 jobs:
   checkout_code:
