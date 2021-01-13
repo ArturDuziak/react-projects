@@ -76,41 +76,82 @@
 #           requires:
 #             - one
 
-version: 2
+# version: 2
+# jobs:
+#   build:
+#     docker:
+#       - image: cimg/node:15.5.1
+#     steps:
+#       - checkout
+#       - run: node --version
+#   checklint:
+#     docker:
+#       - image: cimg/node:15.5.1
+#     steps:
+#       - checkout
+#       - run: npm install
+#       - run: yarn lint
+#   check_cypress:
+#     docker:
+#       - image: cypress/browsers:node12.8.1-chrome78-ff70
+#     steps:
+#       - checkout
+#       - run: npm install
+#       - run: npm install wait-on
+#       - run:
+#           command: npm start
+#           background: true
+#       - run: yarn run wait-on http://localhost:3000 && echo local server ready! && yarn cypress:run
+
+# workflows:
+#   version: 2
+#   lint_and_build:
+#     jobs:
+#       - build
+#       - checklint:
+#           requires:
+#             - build
+#       - check_cypress:
+#           requires:
+#             - checklint
+
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.26.0
+
+executors:
+  node-machine:
+    working_directory: << pipeline.parameters.repo_path >>
+    docker:
+      - image: circleci/node:12.1.0-stretch
+
 jobs:
-  build:
-    docker:
-      - image: cimg/node:15.5.1
+  checkout_code:
+    executor: node-machine
     steps:
       - checkout
-      - run: node --version
-  checklint:
-    docker:
-      - image: cimg/node:15.5.1
+      - persist_to_workspace:
+          root: << pipeline.parameters.repo_path >>
+          paths:
+            - .
+
+  lint:
+    executor: node-machine
     steps:
-      - checkout
-      - run: npm install
-      - run: yarn lint
-  check_cypress:
-    docker:
-      - image: cypress/browsers:node12.8.1-chrome78-ff70
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm install wait-on
+      - attach_workspace:
+          at: << pipeline.parameters.repo_path >>
       - run:
-          command: npm start
-          background: true
-      - run: yarn run wait-on http://localhost:3000 && echo local server ready! && yarn cypress:run
+          name: Run linter
+          command: yarn run lint
 
 workflows:
-  version: 2
-  lint_and_build:
+  build:
     jobs:
-      - build
-      - checklint:
+      - checkout_code
+      - lint:
           requires:
-            - build
-      - check_cypress:
+            - checkout_code
+      - cypress/run:
           requires:
-            - checklint
+            - lint
+          store_artifacts: true
