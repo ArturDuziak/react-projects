@@ -5,7 +5,7 @@ const todoAppPage = new ToDoAppPage();
 
 describe("Checks editing tickets function", () => {
   beforeEach(() => {
-    cy.fixture("todoApp/oneTicketInToDo.json").then(({ key, value }) => {
+    cy.fixture("todoApp/oneTicketInTodo.json").then(({ key, value }) => {
       window.localStorage.setItem(key, value);
     });
 
