@@ -185,20 +185,20 @@ jobs:
             - yarn-packages-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
       - run:
           name: Install Cypress dependencies
-          command: cd << pipeline.parameters.repo_path >> yarn install --frozen-lockfile
+          command: cd << pipeline.parameters.repo_path >> && yarn install --frozen-lockfile
       - run:
           name: Verify that Cypress is installed correctly and is executable
-          command: cd << pipeline.parameters.repo_path >> npx cypress verify
+          command: cd << pipeline.parameters.repo_path >> && npx cypress verify
       - run:
           name: Start up the app
-          command: cd << pipeline.parameters.repo_path >> yarn start
+          command: cd << pipeline.parameters.repo_path >> && yarn start
           background: true
       - run:
           name: Waiting for server...
-          command: cd << pipeline.parameters.repo_path >> yarn wait-on http://localhost:3000 && echo local server ready!
+          command: cd << pipeline.parameters.repo_path >> && yarn wait-on http://localhost:3000 && echo local server ready!
       - run:
           name: Run e2e tests
-          command: cd << pipeline.parameters.repo_path >> yarn cypress:run --browser chrome --headless
+          command: cd << pipeline.parameters.repo_path >> && yarn cypress:run --browser chrome --headless
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
