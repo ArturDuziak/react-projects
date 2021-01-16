@@ -218,7 +218,7 @@ workflows:
           requires:
             - install_dependencies
       - run_cypress:
-          requies:
+          requires:
             - lint
 
 
