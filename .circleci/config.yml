@@ -131,6 +131,11 @@ executors:
     docker:
       - image: circleci/node:12.18.3
 
+  cypress-machine:
+    description: Docker container with Node 12, Cypress dependencies and Chrome 87
+    docker:
+      - image: cypress/browsers:node12.18.3-chrome87-ff82
+
 jobs:
   checkout_code:
     executor: node-machine
@@ -170,6 +175,38 @@ jobs:
           paths:
             - node_modules
 
+  run_cypress:
+    executor: cypress-machine
+    steps:
+      - attach_workspace:
+          at: << pipeline.parameters.repo_path >>
+      - restore_cache:
+          keys:
+            - cypress-cache-{{ arch }}-{{ checksum "<< yarn.lock" }}
+      - run:
+          name: Install Cypress dependencies
+          command: "cd << pipeline.parameters.repo_path >>/cypress && yarn install --frozen-lockfile"
+      - run:
+          name: Verify that Cypress is installed correctly and is executable
+          command: cd << pipeline.parameters.repo_path >>/cypress && npx cypress verify
+      - save_cache:
+          key: cypress-cache-{{ arch }}-{{ checksum "<< yarn.lock" }}
+          paths:
+            - ~/.cache/Cypress
+      - run:
+          name: Serve app locally and run e2e tests
+          command: |
+            yarn run start \
+            && yarn run wait-on http://localhost:3000 \
+            && echo local server ready! \
+            && yarn run cypress:run --browser chrome --headless
+      - store_artifacts:
+          path: << cypress/videos
+      - store_artifacts:
+          path: << cypress/screenshots
+      - store_test_results:
+          path: test-results
+
 workflows:
   build:
     jobs:
@@ -180,17 +217,25 @@ workflows:
       - lint:
           requires:
             - install_dependencies
-      - cypress/install:
-          requires:
+      - run_cypress:
+          requies:
             - lint
-      - cypress/run:
-          requires:
-            - cypress/install
-          attach-workspace: true
-          yarn: true
-          start: npm start
-          wait-on: "http://localhost:3000"
-          store_artifacts: true
-       - store_test_results:
-          path: test-results
+
+
+
+
+
+      # - cypress/install:
+      #     requires:
+      #       - lint
+      # - cypress/run:
+      #     requires:
+      #       - cypress/install
+      #     attach-workspace: true
+      #     yarn: true
+      #     start: npm start
+      #     wait-on: "http://localhost:3000"
+      #     store_artifacts: true
+      #  - store_test_results:
+      #     path: test-results
 
