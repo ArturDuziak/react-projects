@@ -169,8 +169,7 @@ jobs:
       - save_cache:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
-            - ~/.cache/Cypress
+            - ~/.cache
       - persist_to_workspace:
           root: << pipeline.parameters.repo_path >>
           paths:
@@ -179,7 +178,6 @@ jobs:
   run_cypress:
     executor: cypress-machine
     steps:
-      - checkout
       - attach_workspace:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
@@ -194,7 +192,7 @@ jobs:
       - save_cache:
           key: yarn-packages-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
           paths:
-            - ~/.cache/Cypress
+            - ~/.cache
       - run:
           name: Start up the app
           command: cd << pipeline.parameters.repo_path >> && yarn start
