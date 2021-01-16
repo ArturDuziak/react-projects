@@ -176,7 +176,7 @@ jobs:
             - node_modules
 
   run_cypress:
-    executor: cypress-machine
+    executor: node-machine
     steps:
       - attach_workspace:
           at: << pipeline.parameters.repo_path >>
