@@ -184,7 +184,7 @@ jobs:
           keys:
             - cypress-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
       - run:
-          command: yarn cypress install
+          command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress install
       - run:
           name: Install Cypress dependencies
           command: cd << pipeline.parameters.repo_path >>/cypress && yarn install --frozen-lockfile
