@@ -190,13 +190,15 @@ jobs:
           name: Verify that Cypress is installed correctly and is executable
           command: npx cypress verify
       - run:
-          name: Serve app locally and run e2e tests
-          command: |
-            cd << pipeline.parameters.repo_path >> \
-            && yarn run start \
-            && yarn run wait-on http://localhost:3000 \
-            && echo local server ready! \
-            && yarn run cypress:run --browser chrome --headless
+          name: Start up the app
+          command: yarn start
+          background: true
+      - run:
+          name: Waiting for server..
+          command: yarn wait-on http://localhost:3000 && echo local server ready!
+      - run:
+          name: Run e2e tests
+          command: yarn cypress:run --browser chrome --headless
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
