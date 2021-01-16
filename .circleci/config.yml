@@ -179,6 +179,7 @@ jobs:
   run_cypress:
     executor: cypress-machine
     steps:
+      - checkout
       - attach_workspace:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
