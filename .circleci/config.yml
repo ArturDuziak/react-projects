@@ -188,7 +188,7 @@ jobs:
           command: cd << pipeline.parameters.repo_path >> && yarn install --frozen-lockfile
       - run:
           name: Verify that Cypress is installed correctly and is executable
-          command: cd << pipeline.parameters.repo_path >> && npx cypress verify
+          command: cd << pipeline.parameters.repo_path >> && yarn cypress verify
       - run:
           name: Start up the app
           command: cd << pipeline.parameters.repo_path >> && yarn start
