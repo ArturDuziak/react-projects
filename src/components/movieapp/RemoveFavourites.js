@@ -3,7 +3,7 @@ import React from "react";
 const RemoveFavourites = ({ onClick }) => {
   return (
     <>
-      <span onClick={onClick} className="mr-2">
+      <span onClick={onClick} className="mr-2 favourites-text">
         Remove from favourites
       </span>
       <svg

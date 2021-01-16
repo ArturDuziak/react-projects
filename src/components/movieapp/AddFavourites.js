@@ -3,7 +3,7 @@ import React from "react";
 const AddFavourite = ({ onClick }) => {
   return (
     <>
-      <span onClick={onClick} className="mr-2">
+      <span onClick={onClick} className="mr-2 favourites-text">
         Add to Favourites
       </span>
       <svg

@@ -47,7 +47,7 @@ const MovieList = ({
             <FavouriteComponent />
           </div>
           <div className="movietitleoverlay d-flex align-items-center justify-content-center">
-            <span>{movie.Title}</span>
+            <span className="favourites-text">{movie.Title}</span>
           </div>
         </div>
       ))}
