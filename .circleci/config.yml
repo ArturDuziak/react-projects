@@ -182,7 +182,7 @@ jobs:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
           keys:
-            - cypress-cache-{{ arch }}-{{ checksum "<< yarn.lock" }}
+            - cypress-cache-{{ arch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install Cypress dependencies
           command: "cd << pipeline.parameters.repo_path >>/cypress && yarn install --frozen-lockfile"
@@ -190,7 +190,7 @@ jobs:
           name: Verify that Cypress is installed correctly and is executable
           command: cd << pipeline.parameters.repo_path >>/cypress && npx cypress verify
       - save_cache:
-          key: cypress-cache-{{ arch }}-{{ checksum "<< yarn.lock" }}
+          key: cypress-cache-{{ arch }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/Cypress
       - run:
@@ -201,9 +201,9 @@ jobs:
             && echo local server ready! \
             && yarn run cypress:run --browser chrome --headless
       - store_artifacts:
-          path: << cypress/videos
+          path: cypress/videos
       - store_artifacts:
-          path: << cypress/screenshots
+          path: cypress/screenshots
       - store_test_results:
           path: test-results
 
