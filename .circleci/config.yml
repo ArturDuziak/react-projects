@@ -169,7 +169,8 @@ jobs:
       - save_cache:
           key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache
+            - ~/.cache/yarn
+            - ~/.cache/Cypress
       - persist_to_workspace:
           root: << pipeline.parameters.repo_path >>
           paths:
@@ -206,25 +207,26 @@ jobs:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
           keys:
-            - cypress-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
+            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       # - run:
       #     command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress install
       - run:
           name: Install Cypress dependencies
           command: cd << pipeline.parameters.repo_path >>/cypress && yarn install --frozen-lockfile
       - run:
-          name: Verify that Cypress is installed correctly and is executable
-          command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress verify
-      - save_cache:
-          key: cypress-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
-          paths:
-            - ~/.cache
-      - run:
           name: CHECKING FILES
           command: pwd && ls -a && cd .cache/ && ls -a && pwd
       - run:
           name: CHECKING FILES
           command: cd .. && ls -a && pwd
+      - run:
+          name: Verify that Cypress is installed correctly and is executable
+          command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress verify
+      - save_cache:
+          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - ~/.cache/Cypress
       - run:
           name: Start up the app
           command: cd << pipeline.parameters.repo_path >> && yarn start
