@@ -190,11 +190,11 @@ jobs:
           name: check pwd
           command: pwd
       - run:
-          name: go depper and check ls
-          command: cd repo/ && ls -a
+          name: go on directory up and check
+          command: cd .. && pwd && ls -a
       - run:
           name: go into cache
-          command: cd .cache && ls -a
+          command: cd .. && cd .cache/ && ls -a
 
   run_cypress:
     executor: cypress-machine
