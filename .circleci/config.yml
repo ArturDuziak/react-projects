@@ -208,20 +208,12 @@ jobs:
       - restore_cache:
           keys:
             - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
-      # - run:
-      #     command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress install
       - run:
           name: Install Cypress dependencies
-          command: cd << pipeline.parameters.repo_path >>/cypress && yarn install --frozen-lockfile
-      - run:
-          name: CHECKING FILES
-          command: pwd && ls -a && cd .cache/ && ls -a && pwd
-      - run:
-          name: CHECKING FILES
-          command: cd .. && ls -a && pwd
+          command: cd << pipeline.parameters.repo_path >> && yarn install --frozen-lockfile
       - run:
           name: Verify that Cypress is installed correctly and is executable
-          command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress verify
+          command: cd << pipeline.parameters.repo_path >> && yarn cypress verify
       - save_cache:
           key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
           paths:
@@ -237,6 +229,12 @@ jobs:
       - run:
           name: Run e2e tests
           command: cd << pipeline.parameters.repo_path >> && yarn cypress:run --browser chrome --headless
+      - run:
+          name: CHECKING FILES
+          command: pwd && ls -a && cd .cache/ && ls -a && pwd
+      - run:
+          name: CHECKING FILES
+          command: cd .. && ls -a && pwd
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:
