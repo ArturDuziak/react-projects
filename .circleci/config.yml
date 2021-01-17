@@ -123,7 +123,7 @@ parameters:
   repo_path:
     description: the path where the repository is cloned into
     type: string
-    default: ~/app
+    default: ~/
 
 executors:
   node-machine:
