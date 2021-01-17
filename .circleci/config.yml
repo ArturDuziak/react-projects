@@ -175,7 +175,6 @@ jobs:
           root: << pipeline.parameters.repo_path >>
           paths:
             - node_modules
-            - .cache/Cypress
 
   check_files:
     executor: node-machine
@@ -202,34 +201,34 @@ jobs:
           command: cd .. && cd .cache/yarn/ && ls -a
 
   run_cypress:
-    executor: cypress-machine
+    executor: node-machine
     steps:
       - attach_workspace:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
           keys:
-            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
+            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install Cypress dependencies
-          command: cd << pipeline.parameters.repo_path >> && yarn install --frozen-lockfile
+          command: yarn install --frozen-lockfile
       - run:
           name: Verify that Cypress is installed correctly and is executable
-          command: cd << pipeline.parameters.repo_path >> && yarn cypress verify
+          command: yarn cypress verify
       - save_cache:
-          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
+          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
             - ~/.cache/Cypress
       - run:
           name: Start up the app
-          command: cd << pipeline.parameters.repo_path >> && yarn start
+          command: yarn start
           background: true
       - run:
           name: Waiting for server...
-          command: cd << pipeline.parameters.repo_path >> && yarn wait-on http://localhost:3000 && echo local server ready!
+          command: yarn wait-on http://localhost:3000 && echo local server ready!
       - run:
           name: Run e2e tests
-          command: cd << pipeline.parameters.repo_path >> && yarn cypress:run --browser chrome --headless
+          command: yarn cypress:run --browser chrome --headless
       - run:
           name: CHECKING FILES
           command: pwd && ls -a && cd .cache/ && ls -a && pwd
