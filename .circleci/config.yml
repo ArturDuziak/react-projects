@@ -203,6 +203,7 @@ jobs:
   run_cypress:
     executor: node-machine
     steps:
+      - checkout
       - attach_workspace:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
@@ -214,11 +215,11 @@ jobs:
       - run:
           name: Verify that Cypress is installed correctly and is executable
           command: yarn cypress verify
-      - save_cache:
-          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-            - ~/.cache/Cypress
+      # - save_cache:
+      #     key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      #     paths:
+      #       - ~/.cache/yarn
+      #       - ~/.cache/Cypress
       - run:
           name: Start up the app
           command: yarn start
