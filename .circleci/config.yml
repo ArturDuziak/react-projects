@@ -207,7 +207,7 @@ jobs:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
           keys:
-            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
       # - run:
       #     command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress install
       - run:
@@ -223,7 +223,7 @@ jobs:
           name: Verify that Cypress is installed correctly and is executable
           command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress verify
       - save_cache:
-          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
           paths:
             - ~/.cache/yarn
             - ~/.cache/Cypress
@@ -261,10 +261,6 @@ workflows:
           requires:
             - lint
 
-
-
-
-
       # - cypress/install:
       #     requires:
       #       - lint
@@ -278,4 +274,3 @@ workflows:
       #     store_artifacts: true
       #  - store_test_results:
       #     path: test-results
-
