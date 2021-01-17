@@ -175,6 +175,27 @@ jobs:
           paths:
             - node_modules
 
+  check_files:
+    executor: node-machine
+    steps:
+      - attach_workspace:
+          at: << pipeline.parameters.repo_path >>
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: LS all files
+          command: ls -a
+      - run:
+          name: check pwd
+          command: pwd
+      - run:
+          name: go depper and check ls
+          command: cd repo/ && ls -a
+      - run:
+          name: go into cache
+          command: cd .cache && ls -a
+
   run_cypress:
     executor: cypress-machine
     steps:
@@ -183,8 +204,8 @@ jobs:
       - restore_cache:
           keys:
             - cypress-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
-      - run:
-          command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress install
+      # - run:
+      #     command: cd << pipeline.parameters.repo_path >>/cypress && yarn cypress install
       - run:
           name: Install Cypress dependencies
           command: cd << pipeline.parameters.repo_path >>/cypress && yarn install --frozen-lockfile
