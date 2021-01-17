@@ -116,8 +116,6 @@
 #             - checklint
 
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1.26.0
 
 parameters:
   repo_path:
@@ -129,7 +127,7 @@ executors:
   node-machine:
     working_directory: << pipeline.parameters.repo_path >>
     docker:
-      - image: circleci/node:12.18.3
+      - image: circleci/node:12.18.0-stretch
 
   cypress-machine:
     description: Docker container with Node 12, Cypress dependencies and Chrome 87
@@ -201,9 +199,8 @@ jobs:
           command: cd .. && cd .cache/yarn/ && ls -a
 
   run_cypress:
-    executor: node-machine
+    executor: cypress-machine
     steps:
-      - checkout
       - attach_workspace:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
@@ -211,25 +208,24 @@ jobs:
             - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install Cypress dependencies
-          command: yarn install --frozen-lockfile
+          command: cd << pipeline.parameters.repo_path >> && yarn install --frozen-lockfile
       - run:
           name: Verify that Cypress is installed correctly and is executable
-          command: yarn cypress verify
-      # - save_cache:
-      #     key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-      #     paths:
-      #       - ~/.cache/yarn
-      #       - ~/.cache/Cypress
+          command: cd << pipeline.parameters.repo_path >> && npx cypress verify
+      - save_cache:
+          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/Cypress
       - run:
           name: Start up the app
-          command: yarn start
+          command: cd << pipeline.parameters.repo_path >> && yarn start
           background: true
       - run:
           name: Waiting for server...
-          command: yarn wait-on http://localhost:3000 && echo local server ready!
+          command: cd << pipeline.parameters.repo_path >> && yarn wait-on http://localhost:3000 && echo local server ready!
       - run:
           name: Run e2e tests
-          command: yarn cypress:run --browser chrome --headless
+          command: cd << pipeline.parameters.repo_path >> && yarn cypress:run --browser chrome --headless
       - run:
           name: CHECKING FILES
           command: pwd && ls -a && cd .cache/ && ls -a && pwd
