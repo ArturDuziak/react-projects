@@ -195,6 +195,9 @@ jobs:
       - run:
           name: go into cache
           command: cd .. && cd .cache/ && ls -a
+      - run:
+          name: go into yarn
+          command: cd .. && cd .cache/yarn/ && ls -a
 
   run_cypress:
     executor: cypress-machine
@@ -216,6 +219,12 @@ jobs:
           key: cypress-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
           paths:
             - ~/.cache/Cypress
+      - run:
+          name: CHECKING FILES
+          command: pwd && ls -a && cd .cache/ && ls -a && pwd
+      - run:
+          name: CHECKING FILES
+          command: cd .. && ls -a && pwd
       - run:
           name: Start up the app
           command: cd << pipeline.parameters.repo_path >> && yarn start
