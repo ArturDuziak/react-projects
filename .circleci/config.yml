@@ -175,6 +175,7 @@ jobs:
           root: << pipeline.parameters.repo_path >>
           paths:
             - node_modules
+            - ~/.cache/Cypress
 
   check_files:
     executor: node-machine
