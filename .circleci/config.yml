@@ -123,7 +123,7 @@ parameters:
   repo_path:
     description: the path where the repository is cloned into
     type: string
-    default: ~/repo
+    default: ~/app
 
 executors:
   node-machine:
@@ -169,7 +169,7 @@ jobs:
       - save_cache:
           key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - ~/.cache
       - persist_to_workspace:
           root: << pipeline.parameters.repo_path >>
           paths:
@@ -218,7 +218,7 @@ jobs:
       - save_cache:
           key: cypress-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "<< pipeline.parameters.repo_path >>/yarn.lock" }}
           paths:
-            - ~/.cache/Cypress
+            - ~/.cache
       - run:
           name: CHECKING FILES
           command: pwd && ls -a && cd .cache/ && ls -a && pwd
