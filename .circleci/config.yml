@@ -240,6 +240,9 @@ workflows:
       - install_dependencies:
           requires:
             - checkout_code
+      - check_files:
+          requires:
+            - install_dependencies
       - lint:
           requires:
             - install_dependencies
