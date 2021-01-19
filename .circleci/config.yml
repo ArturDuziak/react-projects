@@ -104,4 +104,4 @@ workflows:
             - install_dependencies
       - run_cypress:
           requires:
-            - install_dependencies
+            - lint
