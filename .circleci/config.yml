@@ -44,12 +44,12 @@ jobs:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
           keys:
-            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies based on lockfile
           command: yarn install --frozen-lockfile
       - save_cache:
-          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
             - ~/.cache/Cypress
@@ -65,8 +65,8 @@ jobs:
           at: << pipeline.parameters.repo_path >>
       - restore_cache:
           keys:
-            - yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-{{ .Environment.CACHE_VERSION }}-
+            - yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ arch }}-
       - run:
           name: Install Cypress dependencies
           command: yarn install --frozen-lockfile && yarn cypress install
@@ -74,7 +74,7 @@ jobs:
           name: Verify that Cypress is installed correctly and is executable
           command: npx cypress verify
       - save_cache:
-          key: yarn-packages-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/Cypress
       - run:
