@@ -10,18 +10,25 @@ export const Navbar = () => {
 
   return (
     <>
-      <aside className={`sidebar ${isSidebarDisplayed && "show-sidebar"}`}>
+      <aside
+        className={`sidebar ${isSidebarDisplayed && "show-sidebar"}`}
+        data-cy="navbar-container"
+      >
         <div className="sidebar-header">
           <img src={logo} className="logo" alt="website logo" />
-          <button className="close-btn" onClick={closeSidebar}>
+          <button
+            className="close-btn"
+            onClick={closeSidebar}
+            data-cy="close-navbar-btn"
+          >
             <FaTimes />
           </button>
         </div>
         <ul className="links">
-          {pages.map(item => {
+          {pages.map((item) => {
             const { id, url, text, icon } = item;
             return (
-              <li key={id}>
+              <li key={id} data-cy={`navbar-link-${text}`}>
                 <a href={url}>
                   {icon}
                   {text}
@@ -32,7 +39,7 @@ export const Navbar = () => {
         </ul>
         <span>Hit me up on</span>
         <ul className="social-icons">
-          {social.map(item => {
+          {social.map((item) => {
             const { id, url, icon } = item;
             return (
               <li key={id}>
@@ -47,6 +54,7 @@ export const Navbar = () => {
       <aside
         className={`sidebar-overlay ${isSidebarDisplayed && "show-overlay"}`}
         onClick={closeSidebar}
+        data-cy="navbar-overlay"
       ></aside>
     </>
   );

@@ -20,9 +20,7 @@ describe("Checks deleteing tickets function", () => {
     
     todoAppPage.clickDeleteTicketButton();
 
-    todoAppPage
-      .todoColumn()
-      .within(() => cy.get('[data-cy="ticket-item"]').should("not.exist"));
-    getToast().contains("Ticket deleted successfully")
+    todoAppPage.ticketElement().should("not.exist");
+    getToast().contains("Ticket deleted successfully");
   });
 });

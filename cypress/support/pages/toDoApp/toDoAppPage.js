@@ -7,6 +7,10 @@ class ToDoAppPage {
     return cy.visit(this.url());
   }
 
+  ticketElement() {
+    return cy.get('[data-cy="ticket-item"]');
+  }
+
   addTicketButton() {
     return cy.get('[data-cy="add-ticket-btn"]');
   }

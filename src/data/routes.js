@@ -13,7 +13,7 @@ export const pages = [
   {
     id: 1,
     url: "/",
-    text: "home",
+    text: "Home",
     icon: <FaHome />
   },
   {
