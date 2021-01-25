@@ -63,9 +63,13 @@ export const MovieApp = () => {
     <div className="container-fluid movie-app">
       <div className="row d-flex align-items-center mt-4 mb-4">
         <MovieListHeading heading="Movies" />
-        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+        <SearchBox
+          dataCy="search-movie-input"
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
       </div>
-      <div className="row">
+      <div className="row" data-cy="movies-search-row">
         <MovieList
           movies={movies}
           handleFavouritesClick={addFavouriteMovie}
@@ -77,7 +81,7 @@ export const MovieApp = () => {
       <div className="row d-flex align-items-center mt-4 mb-4">
         <MovieListHeading heading="Favorites" />
       </div>
-      <div className="row">
+      <div className="row" data-cy="favourites-movies-row">
         <MovieList
           movies={favourites}
           handleFavouritesClick={removeFavouriteMovie}
