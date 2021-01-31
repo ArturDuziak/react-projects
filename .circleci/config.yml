@@ -105,5 +105,6 @@ workflows:
             - lint
           yarn: true
           cache-key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
+          start: yarn start
           wait-on: http://localhost:3000
           store_artifacts: true
