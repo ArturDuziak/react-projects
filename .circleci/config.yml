@@ -104,12 +104,26 @@ workflows:
       - lint:
           requires:
             - install_dependencies
+      - cypress/install:
+          name: Install Cypress
+          executor: with-chrome-87
+          requires:
+            - lint
+          yarn: true
+          cache-key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
+          post-steps:
+            - run:
+                name: Show Cypress info
+                command: yarn cypress info
+            - run:
+                name: Catch accidental "it.only"
+                command: yarn run stop-only
       - cypress/run:
           name: Run Cypress tests
           executor: with-chrome-87
           requires:
-            - lint
-          working_directory: << pipeline.parameters.repo_path >>
+            - Install Cypress
+          install-command: echo 'Nothing to install in this job'
           yarn: true
           cache-key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
           no-workspace: true
