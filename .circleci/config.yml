@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  cypress: cypress-io/cypress@1.27.0
+
 parameters:
   repo_path:
     description: the path where the repository is cloned into
@@ -11,12 +14,6 @@ executors:
     working_directory: << pipeline.parameters.repo_path >>
     docker:
       - image: circleci/node:12.18.0-stretch
-
-  cypress-machine:
-    working_directory: << pipeline.parameters.repo_path >>
-    description: Docker container with Node 12, Cypress dependencies and Chrome 87
-    docker:
-      - image: cypress/browsers:node12.18.3-chrome87-ff82
 
 jobs:
   checkout_code:
@@ -58,39 +55,39 @@ jobs:
           paths:
             - node_modules
 
-  run_cypress:
-    executor: cypress-machine
-    steps:
-      - attach_workspace:
-          at: << pipeline.parameters.repo_path >>
-      - restore_cache:
-          keys:
-            - yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-{{ arch }}-
-      - run:
-          name: Install Cypress dependencies
-          command: yarn install --frozen-lockfile && yarn cypress install
-      - run:
-          name: Verify that Cypress is installed correctly and is executable
-          command: npx cypress verify
-      - save_cache:
-          key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/Cypress
-      - run:
-          name: Start up the app
-          command: yarn start
-          background: true
-      - run:
-          name: Waiting for server...
-          command: yarn wait-on http://localhost:3000 && echo local server ready!
-      - run:
-          name: Run e2e tests
-          command: yarn cypress:run --browser chrome --headed
-      - store_artifacts:
-          path: cypress/videos
-      - store_artifacts:
-          path: cypress/screenshots
+  # run_cypress:
+  #   executor: cypress-machine
+  #   steps:
+  #     - attach_workspace:
+  #         at: << pipeline.parameters.repo_path >>
+  #     - restore_cache:
+  #         keys:
+  #           - yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
+  #           - yarn-packages-{{ arch }}-
+  #     - run:
+  #         name: Install Cypress dependencies
+  #         command: yarn install --frozen-lockfile && yarn cypress install
+  #     - run:
+  #         name: Verify that Cypress is installed correctly and is executable
+  #         command: npx cypress verify
+  #     - save_cache:
+  #         key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
+  #         paths:
+  #           - ~/.cache/Cypress
+  #     - run:
+  #         name: Start up the app
+  #         command: yarn start
+  #         background: true
+  #     - run:
+  #         name: Waiting for server...
+  #         command: yarn wait-on http://localhost:3000 && echo local server ready!
+  #     - run:
+  #         name: Run e2e tests
+  #         command: yarn cypress:run --browser chrome --headed
+  #     - store_artifacts:
+  #         path: cypress/videos
+  #     - store_artifacts:
+  #         path: cypress/screenshots
 
 workflows:
   build:
@@ -102,6 +99,10 @@ workflows:
       - lint:
           requires:
             - install_dependencies
-      - run_cypress:
+      - cypress/run:
           requires:
             - lint
+          yarn: true
+          cache-key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
+          wait-on: http://localhost:3000
+          store_artifacts: true
