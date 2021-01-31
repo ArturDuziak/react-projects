@@ -109,8 +109,6 @@ workflows:
           executor: with-chrome-87
           requires:
             - lint
-          pre-steps:
-            - run: yarn stop-only
           working_directory: << pipeline.parameters.repo_path >>
           yarn: true
           cache-key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
