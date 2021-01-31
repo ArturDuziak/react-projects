@@ -100,6 +100,7 @@ workflows:
           requires:
             - install_dependencies
       - cypress/run:
+          executor: cypress/base-12-18-3
           requires:
             - lint
           yarn: true
