@@ -101,7 +101,7 @@ workflows:
             - install_dependencies
       - cypress/run:
           name: Run Cypress tests
-          executor: cypress/browsers:node12.18.3-chrome87-ff82
+          executor: cypress/browsers-chrome78-ff70
           requires:
             - lint
           yarn: true
