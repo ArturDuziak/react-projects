@@ -15,6 +15,12 @@ executors:
     docker:
       - image: circleci/node:12.18.0-stretch
 
+  with-chrome-87:
+    working_directory: << pipeline.parameters.repo_path >>
+    description: Docker container with Node 12, Cypress dependencies and Chrome 87
+    docker:
+      - image: cypress/browsers:node12.18.3-chrome87-ff82
+
 jobs:
   checkout_code:
     executor: node-machine
@@ -101,7 +107,7 @@ workflows:
             - install_dependencies
       - cypress/run:
           name: Run Cypress tests
-          executor: cypress/browsers-chrome78-ff70
+          executor: with-chrome-87
           requires:
             - lint
           yarn: true
