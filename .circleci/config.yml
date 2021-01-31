@@ -100,11 +100,14 @@ workflows:
           requires:
             - install_dependencies
       - cypress/run:
-          executor: cypress/base-12-18-3
+          name: Run Cypress tests
+          executor: cypress/browsers:node12.18.3-chrome87-ff82
           requires:
             - lint
           yarn: true
           cache-key: yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}
+          no-workspace: true
+          browser: chrome
           start: yarn start
           wait-on: http://localhost:3000
           store_artifacts: true
